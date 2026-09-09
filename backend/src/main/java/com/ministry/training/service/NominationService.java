@@ -1,7 +1,7 @@
 package com.ministry.training.service;
 
-import com.ministry.training.model.Nomination;
 import com.ministry.training.exception.DuplicateNominationException;
+import com.ministry.training.model.Nomination;
 import com.ministry.training.repository.NominationRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +22,10 @@ public class NominationService {
         String programmeId = nomination.getTrainingProgrammeId().trim();
 
         boolean duplicate =
-                nominationRepository
-                        .existsByOfficerIdAndTrainingProgrammeId(
-                                officerId,
-                                programmeId
-                        );
+                nominationRepository.existsByOfficerIdAndTrainingProgrammeId(
+                        officerId,
+                        programmeId
+                );
 
         if (duplicate) {
             throw new DuplicateNominationException(
@@ -36,11 +35,17 @@ public class NominationService {
         }
 
         nomination.setOfficerId(officerId);
-        nomination.setTrainingProgrammeId(programmeId);
         nomination.setOfficerName(nomination.getOfficerName().trim());
         nomination.setDepartment(nomination.getDepartment().trim());
+        nomination.setTrainingProgrammeId(programmeId);
         nomination.setTrainingProgrammeTitle(
                 nomination.getTrainingProgrammeTitle().trim()
+        );
+
+        nomination.setVenue(nomination.getVenue().trim());
+        nomination.setTrainer(nomination.getTrainer().trim());
+        nomination.setTargetDepartments(
+                nomination.getTargetDepartments().trim()
         );
 
         return nominationRepository.save(nomination);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,41 +22,43 @@
         header {
             background: #1f3c5c;
             color: white;
-            padding: 22px;
+            padding: 24px 30px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 25px;
+            font-size: 28px;
         }
 
         header p {
-            margin: 6px 0 0;
-            opacity: 0.85;
+            margin: 7px 0 0;
+            opacity: 0.9;
+            font-size: 16px;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
+            padding: 28px;
+            border-radius: 12px;
+            margin-bottom: 28px;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
         h2 {
             margin-top: 0;
+            margin-bottom: 25px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 18px;
         }
 
         .form-group {
@@ -64,37 +67,49 @@
         }
 
         label {
-            margin-bottom: 6px;
             font-weight: bold;
+            margin-bottom: 7px;
         }
 
         input,
         select {
-            padding: 11px;
+            width: 100%;
+            padding: 12px;
             border: 1px solid #bbb;
-            border-radius: 6px;
-            font-size: 14px;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #1f3c5c;
         }
 
         button {
-            margin-top: 20px;
+            margin-top: 22px;
+            padding: 12px 24px;
             background: #1f3c5c;
             color: white;
             border: none;
-            padding: 12px 22px;
-            border-radius: 6px;
+            border-radius: 7px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
         }
 
         button:hover {
             opacity: 0.9;
         }
 
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .message {
-            margin-top: 18px;
-            padding: 12px;
-            border-radius: 6px;
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 7px;
             display: none;
             font-weight: bold;
         }
@@ -109,9 +124,14 @@
             color: #721c24;
         }
 
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 14px;
         }
 
         th,
@@ -119,6 +139,7 @@
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            vertical-align: top;
         }
 
         th {
@@ -126,26 +147,28 @@
         }
 
         .badge {
+            display: inline-block;
             background: #d4edda;
             color: #155724;
-            padding: 5px 9px;
-            border-radius: 12px;
+            padding: 5px 10px;
+            border-radius: 15px;
             font-size: 12px;
             font-weight: bold;
         }
 
-        .empty-row {
+        .empty-message {
             text-align: center;
             color: #777;
+            padding: 20px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 750px) {
             .grid {
                 grid-template-columns: 1fr;
             }
 
-            table {
-                font-size: 13px;
+            header h1 {
+                font-size: 22px;
             }
         }
     </style>
@@ -155,7 +178,7 @@
 
 <header>
     <h1>Government Training Management System</h1>
-
+    <p>Task 1 - Duplicate Nomination Prevention</p>
 </header>
 
 <div class="container">
@@ -169,7 +192,9 @@
             <div class="grid">
 
                 <div class="form-group">
-                    <label for="officerId">Officer ID</label>
+                    <label for="officerId">
+                        Officer ID
+                    </label>
 
                     <input
                             id="officerId"
@@ -180,7 +205,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="officerName">Officer Name</label>
+                    <label for="officerName">
+                        Officer Name
+                    </label>
 
                     <input
                             id="officerName"
@@ -191,19 +218,30 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="department">Department</label>
+                    <label for="department">
+                        Nominating Department
+                    </label>
 
-                    <select id="department" required>
-                        <option value="">Select department</option>
+                    <select
+                            id="department"
+                            required
+                    >
+                        <option value="">
+                            Select department
+                        </option>
+
                         <option value="Finance Division">
                             Finance Division
                         </option>
+
                         <option value="Administration Division">
                             Administration Division
                         </option>
+
                         <option value="IT Division">
                             IT Division
                         </option>
+
                         <option value="Human Resources Division">
                             Human Resources Division
                         </option>
@@ -211,10 +249,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="programme">Training Programme</label>
+                    <label for="programme">
+                        Training Programme
+                    </label>
 
-                    <select id="programme" required>
-
+                    <select
+                            id="programme"
+                            required
+                    >
                         <option value="">
                             Select training programme
                         </option>
@@ -239,13 +281,80 @@
                         >
                             Digital Transformation
                         </option>
-
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="trainingDate">
+                        Training Date
+                    </label>
+
+                    <input
+                            id="trainingDate"
+                            type="date"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="venue">
+                        Venue
+                    </label>
+
+                    <input
+                            id="venue"
+                            type="text"
+                            placeholder="Example: Main Auditorium"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="trainer">
+                        Trainer / Resource Person
+                    </label>
+
+                    <input
+                            id="trainer"
+                            type="text"
+                            placeholder="Example: Mr. Silva"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="maximumParticipants">
+                        Maximum Participants
+                    </label>
+
+                    <input
+                            id="maximumParticipants"
+                            type="number"
+                            min="1"
+                            placeholder="Example: 50"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="targetDepartments">
+                        Target Department(s)
+                    </label>
+
+                    <input
+                            id="targetDepartments"
+                            type="text"
+                            placeholder="Example: Finance, Administration"
+                            required
+                    >
                 </div>
 
             </div>
 
-            <button type="submit">
+            <button
+                    id="submitButton"
+                    type="submit"
+            >
                 Submit Nomination
             </button>
 
@@ -258,40 +367,52 @@
 
     </div>
 
+
     <div class="card">
 
         <h2>Current Nominations</h2>
 
-        <table>
+        <div class="table-wrapper">
 
-            <thead>
-            <tr>
-                <th>Officer ID</th>
-                <th>Officer Name</th>
-                <th>Department</th>
-                <th>Training Programme</th>
-                <th>Status</th>
-            </tr>
-            </thead>
+            <table>
 
-            <tbody id="nominationTable">
+                <thead>
 
-            <tr>
-                <td
-                        colspan="5"
-                        class="empty-row"
-                >
-                    Loading nominations...
-                </td>
-            </tr>
+                <tr>
+                    <th>Officer</th>
+                    <th>Nominating Department</th>
+                    <th>Training Programme</th>
+                    <th>Date</th>
+                    <th>Venue</th>
+                    <th>Trainer</th>
+                    <th>Max</th>
+                    <th>Target Department(s)</th>
+                    <th>Status</th>
+                </tr>
 
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody id="nominationTable">
+
+                <tr>
+                    <td
+                            colspan="9"
+                            class="empty-message"
+                    >
+                        Loading nominations...
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
 </div>
+
 
 <script>
 
@@ -304,11 +425,46 @@
     const table =
         document.getElementById('nominationTable')
 
+    const submitButton =
+        document.getElementById('submitButton')
 
-    function showSuccess(text) {
+    const trainingDateInput =
+        document.getElementById('trainingDate')
+
+
+    /*
+     * Prevent selecting past dates
+     */
+    const now =
+        new Date()
+
+    const year =
+        now.getFullYear()
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(2, '0')
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2, '0')
+
+    const today =
+        `${year}-${month}-${day}`
+
+    trainingDateInput.min =
+        today
+
+
+    function showMessage(
+        text,
+        type
+    ) {
 
         message.className =
-            'message success'
+            `message ${type}`
 
         message.innerText =
             text
@@ -318,16 +474,10 @@
     }
 
 
-    function showError(text) {
-
-        message.className =
-            'message error'
-
-        message.innerText =
-            text
+    function hideMessage() {
 
         message.style.display =
-            'block'
+            'none'
     }
 
 
@@ -336,15 +486,17 @@
         try {
 
             const response =
-                await fetch('/api/nominations')
+                await fetch(
+                    '/api/nominations'
+                )
 
             if (!response.ok) {
 
                 table.innerHTML = `
                     <tr>
                         <td
-                            colspan="5"
-                            class="empty-row"
+                            colspan="9"
+                            class="empty-message"
                         >
                             Failed to load nominations.
                         </td>
@@ -354,18 +506,22 @@
                 return
             }
 
+
             const nominations =
                 await response.json()
 
-            table.innerHTML = ''
+
+            table.innerHTML =
+                ''
+
 
             if (nominations.length === 0) {
 
                 table.innerHTML = `
                     <tr>
                         <td
-                            colspan="5"
-                            class="empty-row"
+                            colspan="9"
+                            class="empty-message"
                         >
                             No nominations available.
                         </td>
@@ -375,28 +531,63 @@
                 return
             }
 
+
             nominations.forEach(
                 nomination => {
 
                     const row =
-                        document.createElement('tr')
+                        document.createElement(
+                            'tr'
+                        )
+
 
                     row.innerHTML = `
-                        <td>
-                            ${nomination.officerId ?? ''}
-                        </td>
 
                         <td>
+                            <strong>
+                                ${nomination.officerId ?? ''}
+                            </strong>
+
+                            <br>
+
                             ${nomination.officerName ?? ''}
                         </td>
+
 
                         <td>
                             ${nomination.department ?? ''}
                         </td>
 
+
                         <td>
                             ${nomination.trainingProgrammeTitle ?? ''}
                         </td>
+
+
+                        <td>
+                            ${nomination.trainingDate ?? ''}
+                        </td>
+
+
+                        <td>
+                            ${nomination.venue ?? ''}
+                        </td>
+
+
+                        <td>
+                            ${nomination.trainer ?? ''}
+                        </td>
+
+
+                        <td>
+                            ${nomination.maximumParticipants ?? ''}
+                        </td>
+
+
+                        <td>
+                            ${nomination.targetDepartments ?? ''}
+                        </td>
+
 
                         <td>
                             <span class="badge">
@@ -405,17 +596,26 @@
                         </td>
                     `
 
-                    table.appendChild(row)
+
+                    table.appendChild(
+                        row
+                    )
                 }
             )
 
         } catch (error) {
 
+            console.error(
+                'Failed to load nominations:',
+                error
+            )
+
+
             table.innerHTML = `
                 <tr>
                     <td
-                        colspan="5"
-                        class="empty-row"
+                        colspan="9"
+                        class="empty-message"
                     >
                         Unable to connect to the server.
                     </td>
@@ -427,55 +627,148 @@
 
     form.addEventListener(
         'submit',
-        async function (event) {
+        async function(event) {
 
             event.preventDefault()
 
-            message.style.display =
-                'none'
+            hideMessage()
+
 
             const officerId =
                 document
-                    .getElementById('officerId')
+                    .getElementById(
+                        'officerId'
+                    )
                     .value
                     .trim()
+
 
             const officerName =
                 document
-                    .getElementById('officerName')
+                    .getElementById(
+                        'officerName'
+                    )
                     .value
                     .trim()
 
+
             const department =
                 document
-                    .getElementById('department')
+                    .getElementById(
+                        'department'
+                    )
                     .value
+
 
             const programme =
                 document
-                    .getElementById('programme')
+                    .getElementById(
+                        'programme'
+                    )
 
-            const trainingProgrammeId =
+
+            const programmeId =
                 programme.value
 
-            const selectedOption =
+
+            const selectedProgramme =
                 programme.options[
                     programme.selectedIndex
                 ]
 
-            const trainingProgrammeTitle =
-                selectedOption.dataset.title
+
+            const programmeTitle =
+                selectedProgramme.dataset.title
 
 
+            const trainingDate =
+                document
+                    .getElementById(
+                        'trainingDate'
+                    )
+                    .value
+
+
+            const venue =
+                document
+                    .getElementById(
+                        'venue'
+                    )
+                    .value
+                    .trim()
+
+
+            const trainer =
+                document
+                    .getElementById(
+                        'trainer'
+                    )
+                    .value
+                    .trim()
+
+
+            const maximumParticipants =
+                Number(
+                    document
+                        .getElementById(
+                            'maximumParticipants'
+                        )
+                        .value
+                )
+
+
+            const targetDepartments =
+                document
+                    .getElementById(
+                        'targetDepartments'
+                    )
+                    .value
+                    .trim()
+
+
+            /*
+             * Extra frontend validation
+             */
             if (
                 !officerId ||
                 !officerName ||
                 !department ||
-                !trainingProgrammeId
+                !programmeId ||
+                !trainingDate ||
+                !venue ||
+                !trainer ||
+                !targetDepartments
             ) {
 
-                showError(
-                    'Please complete all required fields.'
+                showMessage(
+                    'Please complete all required fields.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            if (
+                maximumParticipants < 1
+            ) {
+
+                showMessage(
+                    'Maximum participants must be at least 1.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            if (
+                trainingDate < today
+            ) {
+
+                showMessage(
+                    'Training date cannot be in the past.',
+                    'error'
                 )
 
                 return
@@ -494,11 +787,33 @@
                     department,
 
                 trainingProgrammeId:
-                    trainingProgrammeId,
+                    programmeId,
 
                 trainingProgrammeTitle:
-                    trainingProgrammeTitle
+                    programmeTitle,
+
+                trainingDate:
+                    trainingDate,
+
+                venue:
+                    venue,
+
+                trainer:
+                    trainer,
+
+                maximumParticipants:
+                    maximumParticipants,
+
+                targetDepartments:
+                    targetDepartments
             }
+
+
+            submitButton.disabled =
+                true
+
+            submitButton.innerText =
+                'Submitting...'
 
 
             try {
@@ -507,7 +822,8 @@
                     await fetch(
                         '/api/nominations',
                         {
-                            method: 'POST',
+                            method:
+                                'POST',
 
                             headers: {
                                 'Content-Type':
@@ -524,12 +840,13 @@
 
                 let data = {}
 
+
                 try {
 
                     data =
                         await response.json()
 
-                } catch (jsonError) {
+                } catch (error) {
 
                     data = {}
                 }
@@ -537,26 +854,35 @@
 
                 if (!response.ok) {
 
-                    const errorText =
+                    showMessage(
                         data.message ||
                         data.error ||
-                        `Nomination failed. Server returned ${response.status}.`
-
-                    showError(
-                        errorText
+                        `Nomination failed. Status: ${response.status}`,
+                        'error'
                     )
 
                     return
                 }
 
 
-                showSuccess(
-                    'Nomination registered successfully.'
+                showMessage(
+                    'Nomination registered successfully.',
+                    'success'
                 )
+
 
                 form.reset()
 
+
+                /*
+                 * Date minimum remains after form reset
+                 */
+                trainingDateInput.min =
+                    today
+
+
                 await loadNominations()
+
 
             } catch (error) {
 
@@ -565,9 +891,19 @@
                     error
                 )
 
-                showError(
-                    'Unable to connect to the server.'
+
+                showMessage(
+                    'Unable to connect to the server.',
+                    'error'
                 )
+
+            } finally {
+
+                submitButton.disabled =
+                    false
+
+                submitButton.innerText =
+                    'Submit Nomination'
             }
         }
     )
@@ -578,4 +914,5 @@
 </script>
 
 </body>
+
 </html>

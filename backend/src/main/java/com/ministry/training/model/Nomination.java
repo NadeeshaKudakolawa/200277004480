@@ -1,7 +1,12 @@
 package com.ministry.training.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(
@@ -9,7 +14,10 @@ import jakarta.validation.constraints.NotBlank;
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "uk_officer_programme",
-                        columnNames = {"officer_id", "training_programme_id"}
+                        columnNames = {
+                                "officer_id",
+                                "training_programme_id"
+                        }
                 )
         }
 )
@@ -19,25 +27,58 @@ public class Nomination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Column(name = "officer_id", nullable = false)
+    @NotBlank(message = "Officer ID is required.")
+    @Column(
+            name = "officer_id",
+            nullable = false
+    )
     private String officerId;
 
-    @NotBlank
+    @NotBlank(message = "Officer name is required.")
     @Column(nullable = false)
     private String officerName;
 
-    @NotBlank
+    @NotBlank(message = "Department is required.")
     @Column(nullable = false)
     private String department;
 
-    @NotBlank
-    @Column(name = "training_programme_id", nullable = false)
+    @NotBlank(message = "Training programme is required.")
+    @Column(
+            name = "training_programme_id",
+            nullable = false
+    )
     private String trainingProgrammeId;
 
-    @NotBlank
+    @NotBlank(message = "Training programme title is required.")
     @Column(nullable = false)
     private String trainingProgrammeTitle;
+
+    @NotNull(message = "Training date is required.")
+    @FutureOrPresent(
+            message = "Training date cannot be in the past."
+    )
+    @Column(nullable = false)
+    private LocalDate trainingDate;
+
+    @NotBlank(message = "Venue is required.")
+    @Column(nullable = false)
+    private String venue;
+
+    @NotBlank(message = "Trainer / Resource Person is required.")
+    @Column(nullable = false)
+    private String trainer;
+
+    @NotNull(message = "Maximum participants is required.")
+    @Min(
+            value = 1,
+            message = "Maximum participants must be at least 1."
+    )
+    @Column(nullable = false)
+    private Integer maximumParticipants;
+
+    @NotBlank(message = "Target department is required.")
+    @Column(nullable = false)
+    private String targetDepartments;
 
     public Nomination() {
     }
@@ -86,7 +127,56 @@ public class Nomination {
         return trainingProgrammeTitle;
     }
 
-    public void setTrainingProgrammeTitle(String trainingProgrammeTitle) {
-        this.trainingProgrammeTitle = trainingProgrammeTitle;
+    public void setTrainingProgrammeTitle(
+            String trainingProgrammeTitle
+    ) {
+        this.trainingProgrammeTitle =
+                trainingProgrammeTitle;
+    }
+
+    public LocalDate getTrainingDate() {
+        return trainingDate;
+    }
+
+    public void setTrainingDate(LocalDate trainingDate) {
+        this.trainingDate = trainingDate;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public String getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(String trainer) {
+        this.trainer = trainer;
+    }
+
+    public Integer getMaximumParticipants() {
+        return maximumParticipants;
+    }
+
+    public void setMaximumParticipants(
+            Integer maximumParticipants
+    ) {
+        this.maximumParticipants =
+                maximumParticipants;
+    }
+
+    public String getTargetDepartments() {
+        return targetDepartments;
+    }
+
+    public void setTargetDepartments(
+            String targetDepartments
+    ) {
+        this.targetDepartments =
+                targetDepartments;
     }
 }
