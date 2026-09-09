@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Government Training Management System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #1f3c5c;
+            color: white;
+            padding: 22px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            padding: 11px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #1f3c5c;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 6px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #eef2f5;
+        }
+
+        .badge {
+            background: #d4edda;
+            color: #155724;
+            padding: 5px 9px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .empty-row {
+            text-align: center;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Government Training Management System</h1>
+
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Submit Officer Nomination</h2>
+
+        <form id="nominationForm">
+
+            <div class="grid">
+
+                <div class="form-group">
+                    <label for="officerId">Officer ID</label>
+
+                    <input
+                            id="officerId"
+                            type="text"
+                            placeholder="Example: EMP001"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="officerName">Officer Name</label>
+
+                    <input
+                            id="officerName"
+                            type="text"
+                            placeholder="Example: A. Perera"
+                            required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Department</label>
+
+                    <select id="department" required>
+                        <option value="">Select department</option>
+                        <option value="Finance Division">
+                            Finance Division
+                        </option>
+                        <option value="Administration Division">
+                            Administration Division
+                        </option>
+                        <option value="IT Division">
+                            IT Division
+                        </option>
+                        <option value="Human Resources Division">
+                            Human Resources Division
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="programme">Training Programme</label>
+
+                    <select id="programme" required>
+
+                        <option value="">
+                            Select training programme
+                        </option>
+
+                        <option
+                                value="TR001"
+                                data-title="Cyber Security Awareness"
+                        >
+                            Cyber Security Awareness
+                        </option>
+
+                        <option
+                                value="TR002"
+                                data-title="Public Sector Leadership"
+                        >
+                            Public Sector Leadership
+                        </option>
+
+                        <option
+                                value="TR003"
+                                data-title="Digital Transformation"
+                        >
+                            Digital Transformation
+                        </option>
+
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit">
+                Submit Nomination
+            </button>
+
+            <div
+                    id="message"
+                    class="message"
+            ></div>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Current Nominations</h2>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Officer ID</th>
+                <th>Officer Name</th>
+                <th>Department</th>
+                <th>Training Programme</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody id="nominationTable">
+
+            <tr>
+                <td
+                        colspan="5"
+                        class="empty-row"
+                >
+                    Loading nominations...
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+    const form =
+        document.getElementById('nominationForm')
+
+    const message =
+        document.getElementById('message')
+
+    const table =
+        document.getElementById('nominationTable')
+
+
+    function showSuccess(text) {
+
+        message.className =
+            'message success'
+
+        message.innerText =
+            text
+
+        message.style.display =
+            'block'
+    }
+
+
+    function showError(text) {
+
+        message.className =
+            'message error'
+
+        message.innerText =
+            text
+
+        message.style.display =
+            'block'
+    }
+
+
+    async function loadNominations() {
+
+        try {
+
+            const response =
+                await fetch('/api/nominations')
+
+            if (!response.ok) {
+
+                table.innerHTML = `
+                    <tr>
+                        <td
+                            colspan="5"
+                            class="empty-row"
+                        >
+                            Failed to load nominations.
+                        </td>
+                    </tr>
+                `
+
+                return
+            }
+
+            const nominations =
+                await response.json()
+
+            table.innerHTML = ''
+
+            if (nominations.length === 0) {
+
+                table.innerHTML = `
+                    <tr>
+                        <td
+                            colspan="5"
+                            class="empty-row"
+                        >
+                            No nominations available.
+                        </td>
+                    </tr>
+                `
+
+                return
+            }
+
+            nominations.forEach(
+                nomination => {
+
+                    const row =
+                        document.createElement('tr')
+
+                    row.innerHTML = `
+                        <td>
+                            ${nomination.officerId ?? ''}
+                        </td>
+
+                        <td>
+                            ${nomination.officerName ?? ''}
+                        </td>
+
+                        <td>
+                            ${nomination.department ?? ''}
+                        </td>
+
+                        <td>
+                            ${nomination.trainingProgrammeTitle ?? ''}
+                        </td>
+
+                        <td>
+                            <span class="badge">
+                                REGISTERED
+                            </span>
+                        </td>
+                    `
+
+                    table.appendChild(row)
+                }
+            )
+
+        } catch (error) {
+
+            table.innerHTML = `
+                <tr>
+                    <td
+                        colspan="5"
+                        class="empty-row"
+                    >
+                        Unable to connect to the server.
+                    </td>
+                </tr>
+            `
+        }
+    }
+
+
+    form.addEventListener(
+        'submit',
+        async function (event) {
+
+            event.preventDefault()
+
+            message.style.display =
+                'none'
+
+            const officerId =
+                document
+                    .getElementById('officerId')
+                    .value
+                    .trim()
+
+            const officerName =
+                document
+                    .getElementById('officerName')
+                    .value
+                    .trim()
+
+            const department =
+                document
+                    .getElementById('department')
+                    .value
+
+            const programme =
+                document
+                    .getElementById('programme')
+
+            const trainingProgrammeId =
+                programme.value
+
+            const selectedOption =
+                programme.options[
+                    programme.selectedIndex
+                ]
+
+            const trainingProgrammeTitle =
+                selectedOption.dataset.title
+
+
+            if (
+                !officerId ||
+                !officerName ||
+                !department ||
+                !trainingProgrammeId
+            ) {
+
+                showError(
+                    'Please complete all required fields.'
+                )
+
+                return
+            }
+
+
+            const requestBody = {
+
+                officerId:
+                    officerId,
+
+                officerName:
+                    officerName,
+
+                department:
+                    department,
+
+                trainingProgrammeId:
+                    trainingProgrammeId,
+
+                trainingProgrammeTitle:
+                    trainingProgrammeTitle
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        '/api/nominations',
+                        {
+                            method: 'POST',
+
+                            headers: {
+                                'Content-Type':
+                                    'application/json'
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    requestBody
+                                )
+                        }
+                    )
+
+
+                let data = {}
+
+                try {
+
+                    data =
+                        await response.json()
+
+                } catch (jsonError) {
+
+                    data = {}
+                }
+
+
+                if (!response.ok) {
+
+                    const errorText =
+                        data.message ||
+                        data.error ||
+                        `Nomination failed. Server returned ${response.status}.`
+
+                    showError(
+                        errorText
+                    )
+
+                    return
+                }
+
+
+                showSuccess(
+                    'Nomination registered successfully.'
+                )
+
+                form.reset()
+
+                await loadNominations()
+
+            } catch (error) {
+
+                console.error(
+                    'Nomination request failed:',
+                    error
+                )
+
+                showError(
+                    'Unable to connect to the server.'
+                )
+            }
+        }
+    )
+
+
+    loadNominations()
+
+</script>
+
+</body>
+</html>
