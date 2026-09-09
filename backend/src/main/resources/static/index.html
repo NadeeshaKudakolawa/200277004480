@@ -22,153 +22,110 @@
         header {
             background: #1f3c5c;
             color: white;
-            padding: 24px 30px;
+            padding: 30px;
+            text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: 30px;
         }
 
         header p {
-            margin: 7px 0 0;
+            margin-top: 10px;
             opacity: 0.9;
-            font-size: 16px;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 30px auto;
+            max-width: 900px;
+            margin: 70px auto;
             padding: 0 20px;
         }
 
-        .card {
-            background: white;
-            padding: 28px;
-            border-radius: 12px;
-            margin-bottom: 28px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
         }
 
-        h2 {
-            margin-top: 0;
-            margin-bottom: 25px;
+        .title h2 {
+            margin-bottom: 8px;
         }
 
-        .grid {
+        .title p {
+            color: #666;
+        }
+
+        .view-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+            gap: 25px;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
+        .view-card {
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
         }
 
-        label {
-            font-weight: bold;
-            margin-bottom: 7px;
+        .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
         }
 
-        input,
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #bbb;
-            border-radius: 7px;
-            font-size: 15px;
+        .view-card h3 {
+            margin: 10px 0;
+            font-size: 23px;
         }
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #1f3c5c;
+        .view-card p {
+            color: #666;
+            line-height: 1.6;
+            min-height: 75px;
         }
 
-        button {
-            margin-top: 22px;
+        .button {
+            display: inline-block;
+            margin-top: 15px;
             padding: 12px 24px;
-            background: #1f3c5c;
-            color: white;
-            border: none;
             border-radius: 7px;
-            cursor: pointer;
-            font-size: 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
         }
 
-        button:hover {
+        .user-button {
+            background: #198754;
+        }
+
+        .admin-button {
+            background: #1f3c5c;
+        }
+
+        .button:hover {
             opacity: 0.9;
         }
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .task-info {
+            margin-top: 35px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
         }
 
-        .message {
-            margin-top: 20px;
-            padding: 14px;
-            border-radius: 7px;
-            display: none;
-            font-weight: bold;
+        .task-info h3 {
+            margin-top: 0;
         }
 
-        .success {
-            background: #d4edda;
-            color: #155724;
+        .task-info li {
+            margin: 10px 0;
         }
 
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        th,
-        td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            vertical-align: top;
-        }
-
-        th {
-            background: #eef2f5;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #d4edda;
-            color: #155724;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .empty-message {
-            text-align: center;
-            color: #777;
-            padding: 20px;
-        }
-
-        @media (max-width: 750px) {
-            .grid {
+        @media (max-width: 700px) {
+            .view-grid {
                 grid-template-columns: 1fr;
-            }
-
-            header h1 {
-                font-size: 22px;
             }
         }
     </style>
@@ -177,741 +134,95 @@
 <body>
 
 <header>
-    <h1>Government Training Management System</h1>
-    <p>Task 1 - Duplicate Nomination Prevention</p>
+
+    <h1>
+        Government Training Management System
+    </h1>
+
+    <p>
+        Task 2 - Limited Training Capacity & Waiting List Management
+    </p>
+
 </header>
+
 
 <div class="container">
 
-    <div class="card">
+    <div class="title">
 
-        <h2>Submit Officer Nomination</h2>
+        <h2>
+            Select System View
+        </h2>
 
-        <form id="nominationForm">
-
-            <div class="grid">
-
-                <div class="form-group">
-                    <label for="officerId">
-                        Officer ID
-                    </label>
-
-                    <input
-                            id="officerId"
-                            type="text"
-                            placeholder="Example: EMP001"
-                            required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="officerName">
-                        Officer Name
-                    </label>
-
-                    <input
-                            id="officerName"
-                            type="text"
-                            placeholder="Example: A. Perera"
-                            required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="department">
-                        Nominating Department
-                    </label>
-
-                    <select
-                            id="department"
-                            required
-                    >
-                        <option value="">
-                            Select department
-                        </option>
-
-                        <option value="Finance Division">
-                            Finance Division
-                        </option>
-
-                        <option value="Administration Division">
-                            Administration Division
-                        </option>
-
-                        <option value="IT Division">
-                            IT Division
-                        </option>
-
-                        <option value="Human Resources Division">
-                            Human Resources Division
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="programme">
-                        Training Programme
-                    </label>
-
-                    <select
-                            id="programme"
-                            required
-                    >
-                        <option value="">
-                            Select training programme
-                        </option>
-
-                        <option
-                                value="TR001"
-                                data-title="Cyber Security Awareness"
-                        >
-                            Cyber Security Awareness
-                        </option>
-
-                        <option
-                                value="TR002"
-                                data-title="Public Sector Leadership"
-                        >
-                            Public Sector Leadership
-                        </option>
-
-                        <option
-                                value="TR003"
-                                data-title="Digital Transformation"
-                        >
-                            Digital Transformation
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="trainingDate">
-                        Training Date
-                    </label>
-
-                    <input
-                            id="trainingDate"
-                            type="date"
-                            required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="venue">
-                        Venue
-                    </label>
-
-                    <input
-                            id="venue"
-                            type="text"
-                            placeholder="Example: Main Auditorium"
-                            required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="trainer">
-                        Trainer / Resource Person
-                    </label>
-
-                    <input
-                            id="trainer"
-                            type="text"
-                            placeholder="Example: Mr. Silva"
-                            required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="maximumParticipants">
-                        Maximum Participants
-                    </label>
-
-                    <input
-                            id="maximumParticipants"
-                            type="number"
-                            min="1"
-                            placeholder="Example: 50"
-                            required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="targetDepartments">
-                        Target Department(s)
-                    </label>
-
-                    <input
-                            id="targetDepartments"
-                            type="text"
-                            placeholder="Example: Finance, Administration"
-                            required
-                    >
-                </div>
-
-            </div>
-
-            <button
-                    id="submitButton"
-                    type="submit"
-            >
-                Submit Nomination
-            </button>
-
-            <div
-                    id="message"
-                    class="message"
-            ></div>
-
-        </form>
+        <p>
+            Choose the appropriate view to continue.
+        </p>
 
     </div>
 
 
-    <div class="card">
+    <div class="view-grid">
 
-        <h2>Current Nominations</h2>
+        <!-- USER VIEW -->
 
-        <div class="table-wrapper">
+        <div class="view-card">
 
-            <table>
+            <div class="icon">
+                👤
+            </div>
 
-                <thead>
+            <h3>
+                User View
+            </h3>
 
-                <tr>
-                    <th>Officer</th>
-                    <th>Nominating Department</th>
-                    <th>Training Programme</th>
-                    <th>Date</th>
-                    <th>Venue</th>
-                    <th>Trainer</th>
-                    <th>Max</th>
-                    <th>Target Department(s)</th>
-                    <th>Status</th>
-                </tr>
+            <p>
+                Check training programme availability,
+                submit a nomination and view your
+                confirmation or waiting-list status.
+            </p>
 
-                </thead>
+            <a
+                    href="/user.html"
+                    class="button user-button"
+            >
+                Open User View
+            </a>
 
-                <tbody id="nominationTable">
+        </div>
 
-                <tr>
-                    <td
-                            colspan="9"
-                            class="empty-message"
-                    >
-                        Loading nominations...
-                    </td>
-                </tr>
 
-                </tbody>
+        <!-- ADMIN VIEW -->
 
-            </table>
+        <div class="view-card">
+
+            <div class="icon">
+                ⚙️
+            </div>
+
+            <h3>
+                Admin View
+            </h3>
+
+            <p>
+                Manage confirmed participants,
+                monitor the waiting list and process
+                participant cancellations.
+            </p>
+
+            <a
+                    href="/admin.html"
+                    class="button admin-button"
+            >
+                Open Admin View
+            </a>
 
         </div>
 
     </div>
 
+
+
 </div>
-
-
-<script>
-
-    const form =
-        document.getElementById('nominationForm')
-
-    const message =
-        document.getElementById('message')
-
-    const table =
-        document.getElementById('nominationTable')
-
-    const submitButton =
-        document.getElementById('submitButton')
-
-    const trainingDateInput =
-        document.getElementById('trainingDate')
-
-
-    /*
-     * Prevent selecting past dates
-     */
-    const now =
-        new Date()
-
-    const year =
-        now.getFullYear()
-
-    const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, '0')
-
-    const day =
-        String(
-            now.getDate()
-        ).padStart(2, '0')
-
-    const today =
-        `${year}-${month}-${day}`
-
-    trainingDateInput.min =
-        today
-
-
-    function showMessage(
-        text,
-        type
-    ) {
-
-        message.className =
-            `message ${type}`
-
-        message.innerText =
-            text
-
-        message.style.display =
-            'block'
-    }
-
-
-    function hideMessage() {
-
-        message.style.display =
-            'none'
-    }
-
-
-    async function loadNominations() {
-
-        try {
-
-            const response =
-                await fetch(
-                    '/api/nominations'
-                )
-
-            if (!response.ok) {
-
-                table.innerHTML = `
-                    <tr>
-                        <td
-                            colspan="9"
-                            class="empty-message"
-                        >
-                            Failed to load nominations.
-                        </td>
-                    </tr>
-                `
-
-                return
-            }
-
-
-            const nominations =
-                await response.json()
-
-
-            table.innerHTML =
-                ''
-
-
-            if (nominations.length === 0) {
-
-                table.innerHTML = `
-                    <tr>
-                        <td
-                            colspan="9"
-                            class="empty-message"
-                        >
-                            No nominations available.
-                        </td>
-                    </tr>
-                `
-
-                return
-            }
-
-
-            nominations.forEach(
-                nomination => {
-
-                    const row =
-                        document.createElement(
-                            'tr'
-                        )
-
-
-                    row.innerHTML = `
-
-                        <td>
-                            <strong>
-                                ${nomination.officerId ?? ''}
-                            </strong>
-
-                            <br>
-
-                            ${nomination.officerName ?? ''}
-                        </td>
-
-
-                        <td>
-                            ${nomination.department ?? ''}
-                        </td>
-
-
-                        <td>
-                            ${nomination.trainingProgrammeTitle ?? ''}
-                        </td>
-
-
-                        <td>
-                            ${nomination.trainingDate ?? ''}
-                        </td>
-
-
-                        <td>
-                            ${nomination.venue ?? ''}
-                        </td>
-
-
-                        <td>
-                            ${nomination.trainer ?? ''}
-                        </td>
-
-
-                        <td>
-                            ${nomination.maximumParticipants ?? ''}
-                        </td>
-
-
-                        <td>
-                            ${nomination.targetDepartments ?? ''}
-                        </td>
-
-
-                        <td>
-                            <span class="badge">
-                                REGISTERED
-                            </span>
-                        </td>
-                    `
-
-
-                    table.appendChild(
-                        row
-                    )
-                }
-            )
-
-        } catch (error) {
-
-            console.error(
-                'Failed to load nominations:',
-                error
-            )
-
-
-            table.innerHTML = `
-                <tr>
-                    <td
-                        colspan="9"
-                        class="empty-message"
-                    >
-                        Unable to connect to the server.
-                    </td>
-                </tr>
-            `
-        }
-    }
-
-
-    form.addEventListener(
-        'submit',
-        async function(event) {
-
-            event.preventDefault()
-
-            hideMessage()
-
-
-            const officerId =
-                document
-                    .getElementById(
-                        'officerId'
-                    )
-                    .value
-                    .trim()
-
-
-            const officerName =
-                document
-                    .getElementById(
-                        'officerName'
-                    )
-                    .value
-                    .trim()
-
-
-            const department =
-                document
-                    .getElementById(
-                        'department'
-                    )
-                    .value
-
-
-            const programme =
-                document
-                    .getElementById(
-                        'programme'
-                    )
-
-
-            const programmeId =
-                programme.value
-
-
-            const selectedProgramme =
-                programme.options[
-                    programme.selectedIndex
-                ]
-
-
-            const programmeTitle =
-                selectedProgramme.dataset.title
-
-
-            const trainingDate =
-                document
-                    .getElementById(
-                        'trainingDate'
-                    )
-                    .value
-
-
-            const venue =
-                document
-                    .getElementById(
-                        'venue'
-                    )
-                    .value
-                    .trim()
-
-
-            const trainer =
-                document
-                    .getElementById(
-                        'trainer'
-                    )
-                    .value
-                    .trim()
-
-
-            const maximumParticipants =
-                Number(
-                    document
-                        .getElementById(
-                            'maximumParticipants'
-                        )
-                        .value
-                )
-
-
-            const targetDepartments =
-                document
-                    .getElementById(
-                        'targetDepartments'
-                    )
-                    .value
-                    .trim()
-
-
-            /*
-             * Extra frontend validation
-             */
-            if (
-                !officerId ||
-                !officerName ||
-                !department ||
-                !programmeId ||
-                !trainingDate ||
-                !venue ||
-                !trainer ||
-                !targetDepartments
-            ) {
-
-                showMessage(
-                    'Please complete all required fields.',
-                    'error'
-                )
-
-                return
-            }
-
-
-            if (
-                maximumParticipants < 1
-            ) {
-
-                showMessage(
-                    'Maximum participants must be at least 1.',
-                    'error'
-                )
-
-                return
-            }
-
-
-            if (
-                trainingDate < today
-            ) {
-
-                showMessage(
-                    'Training date cannot be in the past.',
-                    'error'
-                )
-
-                return
-            }
-
-
-            const requestBody = {
-
-                officerId:
-                    officerId,
-
-                officerName:
-                    officerName,
-
-                department:
-                    department,
-
-                trainingProgrammeId:
-                    programmeId,
-
-                trainingProgrammeTitle:
-                    programmeTitle,
-
-                trainingDate:
-                    trainingDate,
-
-                venue:
-                    venue,
-
-                trainer:
-                    trainer,
-
-                maximumParticipants:
-                    maximumParticipants,
-
-                targetDepartments:
-                    targetDepartments
-            }
-
-
-            submitButton.disabled =
-                true
-
-            submitButton.innerText =
-                'Submitting...'
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        '/api/nominations',
-                        {
-                            method:
-                                'POST',
-
-                            headers: {
-                                'Content-Type':
-                                    'application/json'
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    requestBody
-                                )
-                        }
-                    )
-
-
-                let data = {}
-
-
-                try {
-
-                    data =
-                        await response.json()
-
-                } catch (error) {
-
-                    data = {}
-                }
-
-
-                if (!response.ok) {
-
-                    showMessage(
-                        data.message ||
-                        data.error ||
-                        `Nomination failed. Status: ${response.status}`,
-                        'error'
-                    )
-
-                    return
-                }
-
-
-                showMessage(
-                    'Nomination registered successfully.',
-                    'success'
-                )
-
-
-                form.reset()
-
-
-                /*
-                 * Date minimum remains after form reset
-                 */
-                trainingDateInput.min =
-                    today
-
-
-                await loadNominations()
-
-
-            } catch (error) {
-
-                console.error(
-                    'Nomination request failed:',
-                    error
-                )
-
-
-                showMessage(
-                    'Unable to connect to the server.',
-                    'error'
-                )
-
-            } finally {
-
-                submitButton.disabled =
-                    false
-
-                submitButton.innerText =
-                    'Submit Nomination'
-            }
-        }
-    )
-
-
-    loadNominations()
-
-</script>
 
 </body>
 

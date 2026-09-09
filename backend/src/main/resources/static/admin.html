@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin - Government Training Management System
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f6f8;
+
+            color: #222;
+        }
+
+
+        header {
+            background: #1f3c5c;
+
+            color: white;
+
+            padding: 24px 30px;
+        }
+
+
+        .header-content {
+            max-width: 1250px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        header h1 {
+            margin: 0;
+        }
+
+
+        header p {
+            margin: 7px 0 0;
+        }
+
+
+        .user-link {
+            background: white;
+
+            color: #1f3c5c;
+
+            text-decoration: none;
+
+            padding: 11px 18px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+
+        .container {
+            max-width: 1250px;
+
+            margin: 30px auto;
+
+            padding: 0 20px;
+        }
+
+
+        .card {
+            background: white;
+
+            padding: 27px;
+
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                    0 3px 12px
+                    rgba(0, 0, 0, 0.08);
+        }
+
+
+        h2 {
+            margin-top: 0;
+        }
+
+
+        .description {
+            color: #666;
+
+            line-height: 1.6;
+        }
+
+
+        .grid {
+            display: grid;
+
+            grid-template-columns:
+                    repeat(2, 1fr);
+
+            gap: 17px;
+        }
+
+
+        .form-group {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        label {
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #bbb;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+        }
+
+
+        input:focus,
+        select:focus {
+            outline: none;
+
+            border-color: #1f3c5c;
+        }
+
+
+        button {
+            border: none;
+
+            border-radius: 7px;
+
+            padding: 11px 18px;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+
+        .green-button {
+            background: #198754;
+
+            color: white;
+
+            margin-top: 20px;
+        }
+
+
+        .blue-button {
+            background: #1f3c5c;
+
+            color: white;
+
+            margin-top: 20px;
+        }
+
+
+        .red-button {
+            background: #c82333;
+
+            color: white;
+        }
+
+
+        /*
+         * MESSAGE
+         */
+
+        .message {
+            display: none;
+
+            padding: 14px;
+
+            margin-bottom: 20px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+
+        .success {
+            display: block;
+
+            background: #d4edda;
+
+            color: #155724;
+        }
+
+
+        .warning {
+            display: block;
+
+            background: #fff3cd;
+
+            color: #856404;
+        }
+
+
+        .error {
+            display: block;
+
+            background: #f8d7da;
+
+            color: #721c24;
+        }
+
+
+        /*
+         * SUMMARY
+         */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                    repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+
+        .summary-card {
+            background: #fafafa;
+
+            border: 1px solid #ddd;
+
+            border-radius: 9px;
+
+            padding: 18px;
+        }
+
+
+        .summary-card strong {
+            display: block;
+
+            font-size: 28px;
+
+            margin-top: 8px;
+        }
+
+
+        /*
+         * TABLES
+         */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 15px;
+        }
+
+
+        th,
+        td {
+            padding: 11px;
+
+            border-bottom: 1px solid #ddd;
+
+            text-align: left;
+
+            font-size: 14px;
+
+            vertical-align: middle;
+        }
+
+
+        th {
+            background: #eef2f5;
+        }
+
+
+        .badge {
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 15px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+
+        .nominated {
+            background: #dbeafe;
+
+            color: #1e40af;
+        }
+
+
+        .confirmed {
+            background: #d4edda;
+
+            color: #155724;
+        }
+
+
+        .waiting {
+            background: #fff3cd;
+
+            color: #856404;
+        }
+
+
+        .cancelled {
+            background: #f8d7da;
+
+            color: #721c24;
+        }
+
+
+        .user-booking {
+            background: #e9d5ff;
+
+            color: #6b21a8;
+        }
+
+
+        .position {
+            font-weight: bold;
+
+            color: #856404;
+        }
+
+
+        .empty {
+            text-align: center;
+
+            color: #777;
+
+            padding: 22px;
+        }
+
+
+        @media(max-width: 800px) {
+
+            .grid,
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .header-content {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="header-content">
+
+        <div>
+
+            <h1>
+                Government Training Management System
+            </h1>
+
+            <p>
+                Admin View - Task 1 & Task 2 Management
+            </p>
+
+        </div>
+
+
+        <a
+                href="/user.html"
+                class="user-link"
+        >
+            User View
+        </a>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <div
+            id="message"
+            class="message"
+    ></div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CREATE TRAINING PROGRAMME -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Create Training Programme
+        </h2>
+
+        <p class="description">
+            Programmes created here are automatically
+            available in the User View.
+        </p>
+
+
+        <form id="programmeForm">
+
+
+            <div class="grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Programme ID
+                    </label>
+
+                    <input
+                            id="programmeId"
+                            placeholder="TR001"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Programme Title
+                    </label>
+
+                    <input
+                            id="programmeTitle"
+                            placeholder="Cyber Security Awareness"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Training Date
+                    </label>
+
+                    <input
+                            id="trainingDate"
+                            type="date"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Venue
+                    </label>
+
+                    <input
+                            id="venue"
+                            placeholder="Main Auditorium"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Trainer / Resource Person
+                    </label>
+
+                    <input
+                            id="trainer"
+                            placeholder="Mr. Silva"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Maximum Participants
+                    </label>
+
+                    <input
+                            id="maximumParticipants"
+                            type="number"
+                            min="1"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Target Departments
+                    </label>
+
+                    <input
+                            id="targetDepartments"
+                            placeholder="All Departments"
+                            required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                    type="submit"
+                    class="green-button"
+            >
+                Create Programme
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- TASK 1 OFFICER NOMINATION -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Task 1 - Officer Nomination
+        </h2>
+
+        <p class="description">
+            Duplicate nominations are prevented using
+            Officer ID + Training Programme ID.
+            Officer nominations remain separate from
+            Task 2 user capacity management.
+        </p>
+
+
+        <form id="nominationForm">
+
+
+            <div class="grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Officer ID
+                    </label>
+
+                    <input
+                            id="adminOfficerId"
+                            placeholder="EMP001"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Officer Name
+                    </label>
+
+                    <input
+                            id="adminOfficerName"
+                            placeholder="A. Perera"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Nominating Department
+                    </label>
+
+                    <select
+                            id="adminDepartment"
+                            required
+                    >
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option>
+                            Finance Division
+                        </option>
+
+                        <option>
+                            Administration Division
+                        </option>
+
+                        <option>
+                            IT Division
+                        </option>
+
+                        <option>
+                            Human Resources Division
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Training Programme
+                    </label>
+
+                    <select
+                            id="adminProgramme"
+                            required
+                    >
+
+                        <option value="">
+                            Loading programmes...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                    type="submit"
+                    class="blue-button"
+            >
+                Submit Officer Nomination
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- TASK 1 NOMINATED OFFICERS -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Task 1 - Officer Nominations
+        </h2>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+
+                <thead>
+
+                <tr>
+
+                    <th>
+                        Officer
+                    </th>
+
+                    <th>
+                        Department
+                    </th>
+
+                    <th>
+                        Training Programme
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody id="officerTable">
+
+                <tr>
+
+                    <td
+                            colspan="4"
+                            class="empty"
+                    >
+                        No officer nominations.
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- TASK 2 DASHBOARD -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Task 2 - User Capacity & Waiting List
+        </h2>
+
+        <p class="description">
+            This section contains User Bookings only.
+            Task 1 Officer Nominations are not included
+            in capacity or waiting-list calculations.
+        </p>
+
+
+        <div class="form-group">
+
+            <label>
+                Training Programme
+            </label>
+
+            <select id="dashboardProgramme">
+
+                <option value="">
+                    Select Programme
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="summary-grid">
+
+
+            <div class="summary-card">
+
+                Capacity
+
+                <strong id="capacity">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                Confirmed Users
+
+                <strong id="confirmed">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                Waiting Users
+
+                <strong id="waiting">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                Available Seats
+
+                <strong id="available">
+                    0
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CONFIRMED USER BOOKINGS -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Confirmed Users
+        </h2>
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                <tr>
+
+                    <th>
+                        User
+                    </th>
+
+                    <th>
+                        Type
+                    </th>
+
+                    <th>
+                        Programme
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody id="confirmedTable">
+
+                <tr>
+
+                    <td
+                            colspan="5"
+                            class="empty"
+                    >
+                        Select a training programme.
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- WAITING USER BOOKINGS -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            User Waiting List
+        </h2>
+
+        <p class="description">
+            Waiting users are processed in first-come,
+            first-served order.
+        </p>
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                <tr>
+
+                    <th>
+                        Position
+                    </th>
+
+                    <th>
+                        User ID
+                    </th>
+
+                    <th>
+                        Programme
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody id="waitingTable">
+
+                <tr>
+
+                    <td
+                            colspan="4"
+                            class="empty"
+                    >
+                        Waiting list is empty.
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- CANCELLED USERS -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Cancelled User Bookings
+        </h2>
+
+
+        <div class="table-wrapper">
+
+
+            <table>
+
+
+                <thead>
+
+                <tr>
+
+                    <th>
+                        User ID
+                    </th>
+
+                    <th>
+                        Programme
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody id="cancelledTable">
+
+                <tr>
+
+                    <td
+                            colspan="3"
+                            class="empty"
+                    >
+                        No cancelled user bookings.
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+    const message =
+        document.getElementById(
+            'message'
+        )
+
+
+    const adminProgramme =
+        document.getElementById(
+            'adminProgramme'
+        )
+
+
+    const dashboardProgramme =
+        document.getElementById(
+            'dashboardProgramme'
+        )
+
+
+    const officerTable =
+        document.getElementById(
+            'officerTable'
+        )
+
+
+    const confirmedTable =
+        document.getElementById(
+            'confirmedTable'
+        )
+
+
+    const waitingTable =
+        document.getElementById(
+            'waitingTable'
+        )
+
+
+    const cancelledTable =
+        document.getElementById(
+            'cancelledTable'
+        )
+
+
+    let programmes =
+        []
+
+
+    let nominations =
+        []
+
+
+    const today =
+        new Date()
+            .toISOString()
+            .split('T')[0]
+
+
+    document.getElementById(
+        'trainingDate'
+    ).min =
+        today
+
+
+
+    /*
+     * =================================================
+     * MESSAGE
+     * =================================================
+     */
+
+    function showMessage(
+        text,
+        type
+    ) {
+
+        message.className =
+            `message ${type}`
+
+
+        message.innerText =
+            text
+
+
+        message.style.display =
+            'block'
+    }
+
+
+    function hideMessage() {
+
+        message.className =
+            'message'
+
+
+        message.innerText =
+            ''
+
+
+        message.style.display =
+            'none'
+    }
+
+
+
+    /*
+     * =================================================
+     * ESCAPE
+     * =================================================
+     */
+
+    function escapeHtml(
+        value
+    ) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return ''
+        }
+
+
+        return String(value)
+
+            .replaceAll(
+                '&',
+                '&amp;'
+            )
+
+            .replaceAll(
+                '<',
+                '&lt;'
+            )
+
+            .replaceAll(
+                '>',
+                '&gt;'
+            )
+
+            .replaceAll(
+                '"',
+                '&quot;'
+            )
+
+            .replaceAll(
+                "'",
+                '&#039;'
+            )
+    }
+
+
+
+    /*
+     * =================================================
+     * LOAD PROGRAMMES
+     * =================================================
+     */
+
+    async function loadProgrammes() {
+
+        try {
+
+            const response =
+                await fetch(
+                    '/api/programmes'
+                )
+
+
+            const data =
+                await response.json()
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    'Unable to load programmes.'
+                )
+            }
+
+
+            programmes =
+                data
+
+
+            adminProgramme.innerHTML = `
+
+                <option value="">
+                    Select Programme
+                </option>
+
+            `
+
+
+            dashboardProgramme.innerHTML = `
+
+                <option value="">
+                    Select Programme
+                </option>
+
+            `
+
+
+            programmes.forEach(
+                programme => {
+
+                    const text =
+                        `${programme.title} (${programme.programmeId})`
+
+
+                    adminProgramme.add(
+                        new Option(
+                            text,
+                            programme.programmeId
+                        )
+                    )
+
+
+                    dashboardProgramme.add(
+                        new Option(
+                            text,
+                            programme.programmeId
+                        )
+                    )
+                }
+            )
+
+
+        } catch (error) {
+
+            showMessage(
+                error.message,
+                'error'
+            )
+        }
+    }
+
+
+
+    /*
+     * =================================================
+     * CREATE PROGRAMME
+     * =================================================
+     */
+
+    document.getElementById(
+        'programmeForm'
+    ).addEventListener(
+        'submit',
+        async function(event) {
+
+            event.preventDefault()
+
+
+            hideMessage()
+
+
+            const body = {
+
+                programmeId:
+                    document
+                        .getElementById(
+                            'programmeId'
+                        )
+                        .value
+                        .trim(),
+
+                title:
+                    document
+                        .getElementById(
+                            'programmeTitle'
+                        )
+                        .value
+                        .trim(),
+
+                trainingDate:
+                    document
+                        .getElementById(
+                            'trainingDate'
+                        )
+                        .value,
+
+                venue:
+                    document
+                        .getElementById(
+                            'venue'
+                        )
+                        .value
+                        .trim(),
+
+                trainer:
+                    document
+                        .getElementById(
+                            'trainer'
+                        )
+                        .value
+                        .trim(),
+
+                maximumParticipants:
+                    Number(
+                        document
+                            .getElementById(
+                                'maximumParticipants'
+                            )
+                            .value
+                    ),
+
+                targetDepartments:
+                    document
+                        .getElementById(
+                            'targetDepartments'
+                        )
+                        .value
+                        .trim()
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        '/api/programmes',
+                        {
+
+                            method:
+                                'POST',
+
+                            headers: {
+
+                                'Content-Type':
+                                    'application/json'
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    body
+                                )
+                        }
+                    )
+
+
+                const data =
+                    await response.json()
+
+
+                if (!response.ok) {
+
+                    showMessage(
+                        data.message ||
+                        'Unable to create programme.',
+                        'error'
+                    )
+
+                    return
+                }
+
+
+                showMessage(
+                    'Training programme created successfully.',
+                    'success'
+                )
+
+
+                document.getElementById(
+                    'programmeForm'
+                ).reset()
+
+
+                document.getElementById(
+                    'trainingDate'
+                ).min =
+                    today
+
+
+                await loadProgrammes()
+
+
+            } catch (error) {
+
+                showMessage(
+                    'Unable to connect to server.',
+                    'error'
+                )
+            }
+        }
+    )
+
+
+
+    /*
+     * =================================================
+     * TASK 1 OFFICER NOMINATION
+     * =================================================
+     */
+
+    document.getElementById(
+        'nominationForm'
+    ).addEventListener(
+        'submit',
+        async function(event) {
+
+            event.preventDefault()
+
+
+            hideMessage()
+
+
+            const selectedProgramme =
+                programmes.find(
+                    programme =>
+                        programme.programmeId ===
+                        adminProgramme.value
+                )
+
+
+            if (!selectedProgramme) {
+
+                showMessage(
+                    'Please select a training programme.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            const body = {
+
+                officerId:
+                    document
+                        .getElementById(
+                            'adminOfficerId'
+                        )
+                        .value
+                        .trim(),
+
+                officerName:
+                    document
+                        .getElementById(
+                            'adminOfficerName'
+                        )
+                        .value
+                        .trim(),
+
+                department:
+                    document
+                        .getElementById(
+                            'adminDepartment'
+                        )
+                        .value,
+
+                trainingProgrammeId:
+                    selectedProgramme.programmeId,
+
+                trainingProgrammeTitle:
+                    selectedProgramme.title,
+
+                trainingDate:
+                    selectedProgramme.trainingDate,
+
+                venue:
+                    selectedProgramme.venue,
+
+                trainer:
+                    selectedProgramme.trainer,
+
+                maximumParticipants:
+                    selectedProgramme.maximumParticipants,
+
+                targetDepartments:
+                    selectedProgramme.targetDepartments
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        '/api/nominations',
+                        {
+
+                            method:
+                                'POST',
+
+                            headers: {
+
+                                'Content-Type':
+                                    'application/json'
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    body
+                                )
+                        }
+                    )
+
+
+                const data =
+                    await response.json()
+
+
+                if (!response.ok) {
+
+                    showMessage(
+                        data.message ||
+                        'Officer nomination failed.',
+                        'error'
+                    )
+
+                    return
+                }
+
+
+                showMessage(
+                    'Officer nominated successfully.',
+                    'success'
+                )
+
+
+                document.getElementById(
+                    'nominationForm'
+                ).reset()
+
+
+                await loadNominations()
+
+                renderOfficerNominations()
+
+
+            } catch (error) {
+
+                showMessage(
+                    'Unable to connect to server.',
+                    'error'
+                )
+            }
+        }
+    )
+
+
+
+    /*
+     * =================================================
+     * LOAD ALL RECORDS
+     * =================================================
+     */
+
+    async function loadNominations() {
+
+        const response =
+            await fetch(
+                '/api/nominations'
+            )
+
+
+        const data =
+            await response.json()
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                    data.message ||
+                    'Unable to load records.'
+            )
+        }
+
+
+        nominations =
+            data
+    }
+
+
+
+    /*
+     * =================================================
+     * TASK 1 OFFICER TABLE
+     * =================================================
+     */
+
+    function renderOfficerNominations() {
+
+        const officers =
+            nominations
+
+                .filter(
+                    item =>
+                        item.officerId !== null
+                        &&
+                        item.officerId !== undefined
+                        &&
+                        item.officerId !== ''
+                )
+
+                .filter(
+                    item =>
+                        item.status ===
+                        'NOMINATED'
+                )
+
+
+        officerTable.innerHTML =
+            ''
+
+
+        if (
+            officers.length === 0
+        ) {
+
+            officerTable.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="empty"
+                    >
+                        No officer nominations.
+                    </td>
+
+                </tr>
+
+            `
+
+            return
+        }
+
+
+        officers.forEach(
+            officer => {
+
+                const row =
+                    document.createElement(
+                        'tr'
+                    )
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <strong>
+                            ${escapeHtml(
+                                officer.officerId
+                            )}
+                        </strong>
+
+                        <br>
+
+                        ${escapeHtml(
+                            officer.officerName
+                        )}
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(
+                            officer.department
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(
+                            officer.trainingProgrammeTitle
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <span class="badge nominated">
+                            NOMINATED
+                        </span>
+
+                    </td>
+
+                `
+
+
+                officerTable.appendChild(
+                    row
+                )
+            }
+        )
+    }
+
+
+
+    /*
+     * =================================================
+     * TASK 2 PROGRAMME CHANGE
+     * =================================================
+     */
+
+    dashboardProgramme.addEventListener(
+        'change',
+        loadDashboard
+    )
+
+
+
+    /*
+     * =================================================
+     * TASK 2 DASHBOARD
+     * =================================================
+     */
+
+    async function loadDashboard() {
+
+        hideMessage()
+
+
+        const programmeId =
+            dashboardProgramme.value
+
+
+        if (!programmeId) {
+
+            resetTask2()
+
+            return
+        }
+
+
+        try {
+
+            await loadNominations()
+
+
+            /*
+             * Backend summary already counts
+             * CONFIRMED / WAITING only,
+             * therefore officers with NOMINATED
+             * are excluded.
+             */
+            const summaryResponse =
+                await fetch(
+                    `/api/nominations/programme/${encodeURIComponent(programmeId)}/summary`
+                )
+
+
+            const summary =
+                await summaryResponse.json()
+
+
+            if (!summaryResponse.ok) {
+
+                throw new Error(
+                    summary.message ||
+                    'Unable to load capacity summary.'
+                )
+            }
+
+
+            document.getElementById(
+                'capacity'
+            ).innerText =
+                summary.capacity
+
+
+            document.getElementById(
+                'confirmed'
+            ).innerText =
+                summary.confirmed
+
+
+            document.getElementById(
+                'waiting'
+            ).innerText =
+                summary.waiting
+
+
+            document.getElementById(
+                'available'
+            ).innerText =
+                summary.availableSeats
+
+
+
+            /*
+             * IMPORTANT:
+             * TASK 2 USER BOOKINGS ONLY.
+             */
+            const userBookings =
+                nominations.filter(
+                    item =>
+                        item.trainingProgrammeId ===
+                        programmeId
+                        &&
+                        item.userId !== null
+                        &&
+                        item.userId !== undefined
+                        &&
+                        item.userId !== ''
+                )
+
+
+            const confirmedUsers =
+                userBookings
+
+                    .filter(
+                        item =>
+                            item.status ===
+                            'CONFIRMED'
+                    )
+
+                    .sort(
+                        sortByReceivedAt
+                    )
+
+
+            const waitingUsers =
+                userBookings
+
+                    .filter(
+                        item =>
+                            item.status ===
+                            'WAITING_LIST'
+                    )
+
+                    .sort(
+                        sortByReceivedAt
+                    )
+
+
+            const cancelledUsers =
+                userBookings
+
+                    .filter(
+                        item =>
+                            item.status ===
+                            'CANCELLED'
+                    )
+
+
+            renderConfirmedUsers(
+                confirmedUsers
+            )
+
+
+            renderWaitingUsers(
+                waitingUsers
+            )
+
+
+            renderCancelledUsers(
+                cancelledUsers
+            )
+
+
+        } catch (error) {
+
+            showMessage(
+                error.message,
+                'error'
+            )
+        }
+    }
+
+
+
+    function sortByReceivedAt(
+        a,
+        b
+    ) {
+
+        const first =
+            new Date(
+                a.receivedAt
+            ).getTime()
+
+
+        const second =
+            new Date(
+                b.receivedAt
+            ).getTime()
+
+
+        if (
+            first === second
+        ) {
+
+            return a.id - b.id
+        }
+
+
+        return first - second
+    }
+
+
+
+    /*
+     * =================================================
+     * CONFIRMED USERS
+     * =================================================
+     */
+
+    function renderConfirmedUsers(
+        list
+    ) {
+
+        confirmedTable.innerHTML =
+            ''
+
+
+        if (
+            list.length === 0
+        ) {
+
+            confirmedTable.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        class="empty"
+                    >
+                        No confirmed users.
+                    </td>
+
+                </tr>
+
+            `
+
+            return
+        }
+
+
+        list.forEach(
+            booking => {
+
+                const row =
+                    document.createElement(
+                        'tr'
+                    )
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <strong>
+                            ${escapeHtml(
+                                booking.userId
+                            )}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="badge user-booking">
+                            USER BOOKING
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            booking.trainingProgrammeTitle
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="badge confirmed">
+                            CONFIRMED
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="red-button"
+                            onclick="cancelUserFromAdmin(${booking.id})"
+                        >
+                            Cancel
+                        </button>
+
+                    </td>
+
+                `
+
+
+                confirmedTable.appendChild(
+                    row
+                )
+            }
+        )
+    }
+
+
+
+    /*
+     * =================================================
+     * WAITING USERS
+     * =================================================
+     */
+
+    function renderWaitingUsers(
+        list
+    ) {
+
+        waitingTable.innerHTML =
+            ''
+
+
+        if (
+            list.length === 0
+        ) {
+
+            waitingTable.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="empty"
+                    >
+                        Waiting list is empty.
+                    </td>
+
+                </tr>
+
+            `
+
+            return
+        }
+
+
+        list.forEach(
+            (booking, index) => {
+
+                const row =
+                    document.createElement(
+                        'tr'
+                    )
+
+
+                row.innerHTML = `
+
+                    <td class="position">
+                        #${index + 1}
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ${escapeHtml(
+                                booking.userId
+                            )}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            booking.trainingProgrammeTitle
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="badge waiting">
+                            WAITING LIST
+                        </span>
+
+                    </td>
+
+                `
+
+
+                waitingTable.appendChild(
+                    row
+                )
+            }
+        )
+    }
+
+
+
+    /*
+     * =================================================
+     * CANCELLED USERS
+     * =================================================
+     */
+
+    function renderCancelledUsers(
+        list
+    ) {
+
+        cancelledTable.innerHTML =
+            ''
+
+
+        if (
+            list.length === 0
+        ) {
+
+            cancelledTable.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="3"
+                        class="empty"
+                    >
+                        No cancelled user bookings.
+                    </td>
+
+                </tr>
+
+            `
+
+            return
+        }
+
+
+        list.forEach(
+            booking => {
+
+                const row =
+                    document.createElement(
+                        'tr'
+                    )
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <strong>
+                            ${escapeHtml(
+                                booking.userId
+                            )}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            booking.trainingProgrammeTitle
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="badge cancelled">
+                            CANCELLED
+                        </span>
+
+                    </td>
+
+                `
+
+
+                cancelledTable.appendChild(
+                    row
+                )
+            }
+        )
+    }
+
+
+
+    /*
+     * =================================================
+     * ADMIN CANCEL USER BOOKING
+     * =================================================
+     */
+
+    async function cancelUserFromAdmin(
+        id
+    ) {
+
+        const confirmation =
+            window.confirm(
+                'Cancel this confirmed user booking?\n\n' +
+                'Waiting #1 will automatically be promoted.'
+            )
+
+
+        if (!confirmation) {
+            return
+        }
+
+
+        try {
+
+            /*
+             * Admin cancel endpoint can cancel
+             * the selected confirmed user booking.
+             */
+            const response =
+                await fetch(
+                    `/api/nominations/${id}/cancel`,
+                    {
+
+                        method:
+                            'PUT'
+                    }
+                )
+
+
+            const data =
+                await response.json()
+
+
+            if (!response.ok) {
+
+                showMessage(
+                    data.message ||
+                    'Unable to cancel booking.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            showMessage(
+                'User booking cancelled successfully. Waiting #1 was automatically promoted if available.',
+                'success'
+            )
+
+
+            await loadDashboard()
+
+
+        } catch (error) {
+
+            showMessage(
+                'Unable to connect to server.',
+                'error'
+            )
+        }
+    }
+
+
+
+    /*
+     * =================================================
+     * RESET TASK 2
+     * =================================================
+     */
+
+    function resetTask2() {
+
+        document.getElementById(
+            'capacity'
+        ).innerText =
+            '0'
+
+
+        document.getElementById(
+            'confirmed'
+        ).innerText =
+            '0'
+
+
+        document.getElementById(
+            'waiting'
+        ).innerText =
+            '0'
+
+
+        document.getElementById(
+            'available'
+        ).innerText =
+            '0'
+
+
+        confirmedTable.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty"
+                >
+                    Select a training programme.
+                </td>
+
+            </tr>
+
+        `
+
+
+        waitingTable.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="empty"
+                >
+                    Waiting list is empty.
+                </td>
+
+            </tr>
+
+        `
+
+
+        cancelledTable.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="3"
+                    class="empty"
+                >
+                    No cancelled user bookings.
+                </td>
+
+            </tr>
+
+        `
+    }
+
+
+
+    /*
+     * =================================================
+     * START PAGE
+     * =================================================
+     */
+
+    async function start() {
+
+        try {
+
+            await loadProgrammes()
+
+
+            await loadNominations()
+
+
+            renderOfficerNominations()
+
+
+        } catch (error) {
+
+            showMessage(
+                error.message,
+                'error'
+            )
+        }
+    }
+
+
+    start()
+
+
+</script>
+
+
+</body>
+
+</html>

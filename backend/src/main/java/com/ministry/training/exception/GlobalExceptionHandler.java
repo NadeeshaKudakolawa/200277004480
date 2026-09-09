@@ -1,5 +1,6 @@
 package com.ministry.training.exception;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -46,8 +47,9 @@ public class GlobalExceptionHandler {
                         .getBindingResult()
                         .getFieldErrors()
                         .stream()
-                        .map(error ->
-                                error.getDefaultMessage()
+                        .map(
+                                error ->
+                                        error.getDefaultMessage()
                         )
                         .distinct()
                         .collect(
@@ -65,6 +67,52 @@ public class GlobalExceptionHandler {
         response.put(
                 "message",
                 message
+        );
+
+        return ResponseEntity
+                .badRequest()
+                .body(response);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String, String>> handleDatabaseConflict(
+            DataIntegrityViolationException exception
+    ) {
+
+        Map<String, String> response =
+                new LinkedHashMap<>();
+
+        response.put(
+                "status",
+                "CONFLICT"
+        );
+
+        response.put(
+                "message",
+                "The record conflicts with existing data."
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(response);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, String>> handleRuntime(
+            RuntimeException exception
+    ) {
+
+        Map<String, String> response =
+                new LinkedHashMap<>();
+
+        response.put(
+                "status",
+                "ERROR"
+        );
+
+        response.put(
+                "message",
+                exception.getMessage()
         );
 
         return ResponseEntity
