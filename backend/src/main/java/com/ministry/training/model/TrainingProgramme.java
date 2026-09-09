@@ -1,10 +1,8 @@
 package com.ministry.training.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
@@ -13,41 +11,43 @@ import java.time.LocalDate;
 public class TrainingProgramme {
 
     @Id
-    @NotBlank(message = "Programme ID is required.")
-    @Column(name = "programme_id")
     private String programmeId;
 
-    @NotBlank(message = "Programme title is required.")
-    @Column(nullable = false)
+    /*
+     * FINANCIAL
+     * TECHNICAL
+     * MANAGEMENT
+     * GENERAL
+     */
+    private String programmeType;
+
     private String title;
 
-    @NotNull(message = "Training date is required.")
-    @FutureOrPresent(message = "Training date cannot be in the past.")
-    @Column(nullable = false)
     private LocalDate trainingDate;
 
-    @NotBlank(message = "Venue is required.")
-    @Column(nullable = false)
     private String venue;
 
-    @NotBlank(message = "Trainer / Resource Person is required.")
-    @Column(nullable = false)
     private String trainer;
 
-    @NotNull(message = "Maximum participants is required.")
-    @Min(
-            value = 1,
-            message = "Maximum participants must be at least 1."
-    )
-    @Column(nullable = false)
     private Integer maximumParticipants;
 
-    @NotBlank(message = "Target departments are required.")
-    @Column(nullable = false)
-    private String targetDepartments;
+    /*
+     * TASK 3 configurable rules
+     */
+    private String eligibleDepartments;
+
+    private String requiredGrade;
+
+    private String requiredDesignation;
+
+    private Integer minimumYearsOfService;
+
+    private Integer repeatRestrictionMonths;
+
 
     public TrainingProgramme() {
     }
+
 
     public String getProgrammeId() {
         return programmeId;
@@ -57,6 +57,16 @@ public class TrainingProgramme {
         this.programmeId = programmeId;
     }
 
+
+    public String getProgrammeType() {
+        return programmeType;
+    }
+
+    public void setProgrammeType(String programmeType) {
+        this.programmeType = programmeType;
+    }
+
+
     public String getTitle() {
         return title;
     }
@@ -64,6 +74,7 @@ public class TrainingProgramme {
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     public LocalDate getTrainingDate() {
         return trainingDate;
@@ -73,6 +84,7 @@ public class TrainingProgramme {
         this.trainingDate = trainingDate;
     }
 
+
     public String getVenue() {
         return venue;
     }
@@ -80,6 +92,7 @@ public class TrainingProgramme {
     public void setVenue(String venue) {
         this.venue = venue;
     }
+
 
     public String getTrainer() {
         return trainer;
@@ -89,23 +102,57 @@ public class TrainingProgramme {
         this.trainer = trainer;
     }
 
+
     public Integer getMaximumParticipants() {
         return maximumParticipants;
     }
 
-    public void setMaximumParticipants(
-            Integer maximumParticipants
-    ) {
+    public void setMaximumParticipants(Integer maximumParticipants) {
         this.maximumParticipants = maximumParticipants;
     }
 
-    public String getTargetDepartments() {
-        return targetDepartments;
+
+    public String getEligibleDepartments() {
+        return eligibleDepartments;
     }
 
-    public void setTargetDepartments(
-            String targetDepartments
-    ) {
-        this.targetDepartments = targetDepartments;
+    public void setEligibleDepartments(String eligibleDepartments) {
+        this.eligibleDepartments = eligibleDepartments;
+    }
+
+
+    public String getRequiredGrade() {
+        return requiredGrade;
+    }
+
+    public void setRequiredGrade(String requiredGrade) {
+        this.requiredGrade = requiredGrade;
+    }
+
+
+    public String getRequiredDesignation() {
+        return requiredDesignation;
+    }
+
+    public void setRequiredDesignation(String requiredDesignation) {
+        this.requiredDesignation = requiredDesignation;
+    }
+
+
+    public Integer getMinimumYearsOfService() {
+        return minimumYearsOfService;
+    }
+
+    public void setMinimumYearsOfService(Integer minimumYearsOfService) {
+        this.minimumYearsOfService = minimumYearsOfService;
+    }
+
+
+    public Integer getRepeatRestrictionMonths() {
+        return repeatRestrictionMonths;
+    }
+
+    public void setRepeatRestrictionMonths(Integer repeatRestrictionMonths) {
+        this.repeatRestrictionMonths = repeatRestrictionMonths;
     }
 }

@@ -2,9 +2,12 @@ package com.ministry.training.controller;
 
 import com.ministry.training.model.Nomination;
 import com.ministry.training.service.NominationService;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +15,7 @@ import java.util.Map;
 @RequestMapping("/api/nominations")
 public class NominationController {
 
-    private final NominationService
-            nominationService;
+    private final NominationService nominationService;
 
 
     public NominationController(
@@ -26,69 +28,36 @@ public class NominationController {
 
 
     /*
-     * ADMIN - TASK 1
+     * Task 1 + Task 3 + Task 2
      */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Nomination createNomination(
-            @RequestBody
-            Nomination nomination
+    public ResponseEntity<Nomination>
+    createNomination(
+            @RequestBody Nomination nomination
     ) {
 
-        return nominationService
-                .createNomination(
-                        nomination
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(
+                        nominationService
+                                .createNomination(
+                                        nomination
+                                )
                 );
     }
 
 
     /*
-     * USER BOOKING
-     *
-     * {
-     *   "userId": "USER001",
-     *   "programmeId": "TR001"
-     * }
-     */
-    @PostMapping("/book")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Nomination createUserBooking(
-            @RequestBody
-            Map<String, String> request
-    ) {
-
-        return nominationService
-                .createUserBooking(
-                        request.get("userId"),
-                        request.get("programmeId")
-                );
-    }
-
-
-    /*
-     * ALL NOMINATIONS / BOOKINGS
+     * ALL NOMINATIONS
      */
     @GetMapping
-    public List<Nomination> getAllNominations() {
+    public ResponseEntity<List<Nomination>>
+    getAllNominations() {
 
-        return nominationService
-                .getAllNominations();
-    }
-
-
-    /*
-     * USER'S BOOKINGS
-     */
-    @GetMapping("/user/{userId}")
-    public List<Nomination> getUserBookings(
-            @PathVariable
-            String userId
-    ) {
-
-        return nominationService
-                .getUserBookings(
-                        userId
-                );
+        return ResponseEntity.ok(
+                nominationService
+                        .getAllNominations()
+        );
     }
 
 
@@ -98,15 +67,17 @@ public class NominationController {
     @GetMapping(
             "/programme/{programmeId}/summary"
     )
-    public Map<String, Object> getProgrammeSummary(
-            @PathVariable
-            String programmeId
+    public ResponseEntity<Map<String, Object>>
+    getProgrammeSummary(
+            @PathVariable String programmeId
     ) {
 
-        return nominationService
-                .getProgrammeSummary(
-                        programmeId
-                );
+        return ResponseEntity.ok(
+                nominationService
+                        .getProgrammeSummary(
+                                programmeId
+                        )
+        );
     }
 
 
@@ -116,85 +87,56 @@ public class NominationController {
     @GetMapping(
             "/{id}/waiting-position"
     )
-    public Map<String, Long> getWaitingPosition(
-            @PathVariable
-            Long id
+    public ResponseEntity<Map<String, Object>>
+    getWaitingPosition(
+            @PathVariable Long id
     ) {
 
-        return Map.of(
-                "position",
+        long position =
                 nominationService
                         .getWaitingPosition(
                                 id
-                        )
+                        );
+
+
+        Map<String, Object> response =
+                new LinkedHashMap<>();
+
+
+        response.put(
+                "nominationId",
+                id
+        );
+
+
+        response.put(
+                "waitingPosition",
+                position
+        );
+
+
+        return ResponseEntity.ok(
+                response
         );
     }
 
 
     /*
-     * ADMIN CANCEL
+     * CANCEL + AUTO PROMOTION
      */
     @PutMapping(
             "/{id}/cancel"
     )
-    public Map<String, Object> cancelNomination(
-            @PathVariable
-            Long id
+    public ResponseEntity<Nomination>
+    cancelNomination(
+            @PathVariable Long id
     ) {
 
-        Nomination cancelled =
+        return ResponseEntity.ok(
                 nominationService
                         .cancelNomination(
                                 id
-                        );
-
-
-        return Map.of(
-                "message",
-                "Nomination cancelled successfully.",
-
-                "nomination",
-                cancelled
-        );
-    }
-
-
-    /*
-     * USER CANCEL OWN BOOKING
-     *
-     * {
-     *   "userId": "USER001"
-     * }
-     */
-    @PutMapping(
-            "/bookings/{id}/cancel"
-    )
-    public Map<String, Object> cancelUserBooking(
-            @PathVariable
-            Long id,
-
-            @RequestBody
-            Map<String, String> request
-    ) {
-
-        Nomination cancelled =
-                nominationService
-                        .cancelUserBooking(
-                                id,
-                                request.get(
-                                        "userId"
-                                )
-                        );
-
-
-        return Map.of(
-                "message",
-                "Booking cancelled successfully. " +
-                        "If the cancelled booking was confirmed, " +
-                        "the first waiting participant was automatically promoted.",
-
-                "booking",
-                cancelled
+                        )
         );
     }
 }

@@ -2,225 +2,108 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Government Training Management System</title>
+    <meta charset="UTF-8">
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Government Training Management System
+    </title>
+
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             font-family: Arial, sans-serif;
+
             background: #f4f6f8;
-            color: #222;
-        }
-
-        header {
-            background: #1f3c5c;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 30px;
-        }
-
-        header p {
-            margin-top: 10px;
-            opacity: 0.9;
         }
 
         .container {
-            max-width: 900px;
-            margin: 70px auto;
-            padding: 0 20px;
-        }
+            width: 90%;
+            max-width: 700px;
 
-        .title {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .title h2 {
-            margin-bottom: 8px;
-        }
-
-        .title p {
-            color: #666;
-        }
-
-        .view-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-        }
-
-        .view-card {
             background: white;
-            padding: 35px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+            padding: 50px;
+
             text-align: center;
+
+            border-radius: 14px;
+
+            box-shadow:
+                    0 5px 20px
+                    rgba(0, 0, 0, 0.1);
         }
 
-        .icon {
-            font-size: 45px;
-            margin-bottom: 15px;
+        h1 {
+            color: #1f3c5c;
         }
 
-        .view-card h3 {
-            margin: 10px 0;
-            font-size: 23px;
-        }
-
-        .view-card p {
+        p {
             color: #666;
-            line-height: 1.6;
-            min-height: 75px;
+            line-height: 1.7;
         }
 
-        .button {
+        a {
             display: inline-block;
-            margin-top: 15px;
-            padding: 12px 24px;
-            border-radius: 7px;
-            text-decoration: none;
+
+            margin-top: 20px;
+
+            padding: 14px 25px;
+
+            background: #1f3c5c;
             color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
             font-weight: bold;
         }
 
-        .user-button {
-            background: #198754;
-        }
-
-        .admin-button {
-            background: #1f3c5c;
-        }
-
-        .button:hover {
+        a:hover {
             opacity: 0.9;
         }
 
-        .task-info {
-            margin-top: 35px;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .task-info h3 {
-            margin-top: 0;
-        }
-
-        .task-info li {
-            margin: 10px 0;
-        }
-
-        @media (max-width: 700px) {
-            .view-grid {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
+
 </head>
+
 
 <body>
 
-<header>
+<div class="container">
 
     <h1>
         Government Training Management System
     </h1>
 
     <p>
-        Task 2 - Limited Training Capacity & Waiting List Management
+        Manage training programmes,
+        officer nominations,
+        eligibility,
+        capacity and waiting lists.
     </p>
 
-</header>
-
-
-<div class="container">
-
-    <div class="title">
-
-        <h2>
-            Select System View
-        </h2>
-
-        <p>
-            Choose the appropriate view to continue.
-        </p>
-
-    </div>
-
-
-    <div class="view-grid">
-
-        <!-- USER VIEW -->
-
-        <div class="view-card">
-
-            <div class="icon">
-                👤
-            </div>
-
-            <h3>
-                User View
-            </h3>
-
-            <p>
-                Check training programme availability,
-                submit a nomination and view your
-                confirmation or waiting-list status.
-            </p>
-
-            <a
-                    href="/user.html"
-                    class="button user-button"
-            >
-                Open User View
-            </a>
-
-        </div>
-
-
-        <!-- ADMIN VIEW -->
-
-        <div class="view-card">
-
-            <div class="icon">
-                ⚙️
-            </div>
-
-            <h3>
-                Admin View
-            </h3>
-
-            <p>
-                Manage confirmed participants,
-                monitor the waiting list and process
-                participant cancellations.
-            </p>
-
-            <a
-                    href="/admin.html"
-                    class="button admin-button"
-            >
-                Open Admin View
-            </a>
-
-        </div>
-
-    </div>
-
-
+    <a href="/admin.html">
+        Open Training Coordinator Dashboard
+    </a>
 
 </div>
 

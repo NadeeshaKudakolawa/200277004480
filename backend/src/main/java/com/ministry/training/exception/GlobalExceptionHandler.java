@@ -3,120 +3,102 @@ package com.ministry.training.exception;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DuplicateNominationException.class)
-    public ResponseEntity<Map<String, String>> handleDuplicate(
+
+    @ExceptionHandler(
+            DuplicateNominationException.class
+    )
+    public ResponseEntity<Map<String, Object>>
+    handleDuplicateNomination(
             DuplicateNominationException exception
     ) {
 
-        Map<String, String> response =
-                new LinkedHashMap<>();
-
-        response.put(
-                "status",
-                "DUPLICATE"
-        );
-
-        response.put(
-                "message",
+        return buildResponse(
+                HttpStatus.CONFLICT,
+                "DUPLICATE",
                 exception.getMessage()
         );
-
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(response);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidation(
-            MethodArgumentNotValidException exception
+
+    @ExceptionHandler(
+            DataIntegrityViolationException.class
+    )
+    public ResponseEntity<Map<String, Object>>
+    handleDatabaseConflict(
+            DataIntegrityViolationException exception
     ) {
 
-        String message =
-                exception
-                        .getBindingResult()
-                        .getFieldErrors()
-                        .stream()
-                        .map(
-                                error ->
-                                        error.getDefaultMessage()
-                        )
-                        .distinct()
-                        .collect(
-                                Collectors.joining(" ")
-                        );
+        return buildResponse(
+                HttpStatus.CONFLICT,
+                "CONFLICT",
+                "The submitted record conflicts with an existing database record."
+        );
+    }
 
-        Map<String, String> response =
+
+    @ExceptionHandler(
+            RuntimeException.class
+    )
+    public ResponseEntity<Map<String, Object>>
+    handleRuntimeException(
+            RuntimeException exception
+    ) {
+
+        return buildResponse(
+                HttpStatus.BAD_REQUEST,
+                "ERROR",
+                exception.getMessage()
+        );
+    }
+
+
+    private ResponseEntity<Map<String, Object>>
+    buildResponse(
+            HttpStatus httpStatus,
+            String status,
+            String message
+    ) {
+
+        Map<String, Object> response =
                 new LinkedHashMap<>();
+
+
+        response.put(
+                "timestamp",
+                LocalDateTime.now()
+        );
+
 
         response.put(
                 "status",
-                "VALIDATION_ERROR"
+                status
         );
+
+
+        response.put(
+                "code",
+                httpStatus.value()
+        );
+
 
         response.put(
                 "message",
                 message
         );
 
-        return ResponseEntity
-                .badRequest()
-                .body(response);
-    }
-
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Map<String, String>> handleDatabaseConflict(
-            DataIntegrityViolationException exception
-    ) {
-
-        Map<String, String> response =
-                new LinkedHashMap<>();
-
-        response.put(
-                "status",
-                "CONFLICT"
-        );
-
-        response.put(
-                "message",
-                "The record conflicts with existing data."
-        );
 
         return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(response);
-    }
-
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, String>> handleRuntime(
-            RuntimeException exception
-    ) {
-
-        Map<String, String> response =
-                new LinkedHashMap<>();
-
-        response.put(
-                "status",
-                "ERROR"
-        );
-
-        response.put(
-                "message",
-                exception.getMessage()
-        );
-
-        return ResponseEntity
-                .badRequest()
+                .status(httpStatus)
                 .body(response);
     }
 }

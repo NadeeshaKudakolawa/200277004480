@@ -5,8 +5,10 @@ import com.ministry.training.model.Nomination;
 import com.ministry.training.model.TrainingProgramme;
 import com.ministry.training.repository.NominationRepository;
 import com.ministry.training.repository.TrainingProgrammeRepository;
+
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,9 +16,6 @@ import java.util.Map;
 
 @Service
 public class NominationService {
-
-    private static final String NOMINATED =
-            "NOMINATED";
 
     private static final String CONFIRMED =
             "CONFIRMED";
@@ -26,6 +25,9 @@ public class NominationService {
 
     private static final String CANCELLED =
             "CANCELLED";
+
+    private static final String NOT_ELIGIBLE =
+            "NOT_ELIGIBLE";
 
 
     private final NominationRepository nominationRepository;
@@ -48,10 +50,163 @@ public class NominationService {
 
     /*
      * =====================================================
-     * TASK 1 - ADMIN OFFICER NOMINATION
+     * COMPLETE NOMINATION PROCESS
      * =====================================================
+     *
+     * Task 1 -> Duplicate
+     * Task 3 -> Eligibility
+     * Task 2 -> Capacity
      */
     public Nomination createNomination(
+            Nomination nomination
+    ) {
+
+        validateOfficerInput(
+                nomination
+        );
+
+
+        String officerId =
+                nomination
+                        .getOfficerId()
+                        .trim()
+                        .toUpperCase();
+
+
+        String programmeId =
+                nomination
+                        .getTrainingProgrammeId()
+                        .trim()
+                        .toUpperCase();
+
+
+        /*
+         * =================================================
+         * TASK 1 - DUPLICATE CHECK
+         * =================================================
+         */
+        if (
+                nominationRepository
+                        .existsByOfficerIdAndTrainingProgrammeId(
+                                officerId,
+                                programmeId
+                        )
+        ) {
+
+            throw new DuplicateNominationException(
+                    "Duplicate nomination detected. " +
+                            "This officer has already been nominated " +
+                            "for this training programme."
+            );
+        }
+
+
+        TrainingProgramme programme =
+                getProgramme(
+                        programmeId
+                );
+
+
+        nomination.setOfficerId(
+                officerId
+        );
+
+
+        nomination.setOfficerName(
+                nomination
+                        .getOfficerName()
+                        .trim()
+        );
+
+
+        nomination.setDepartment(
+                nomination
+                        .getDepartment()
+                        .trim()
+        );
+
+
+        if (
+                nomination.getGrade() != null
+        ) {
+
+            nomination.setGrade(
+                    nomination
+                            .getGrade()
+                            .trim()
+            );
+        }
+
+
+        if (
+                nomination.getDesignation() != null
+        ) {
+
+            nomination.setDesignation(
+                    nomination
+                            .getDesignation()
+                            .trim()
+            );
+        }
+
+
+        applyProgrammeDetails(
+                nomination,
+                programme
+        );
+
+
+        /*
+         * =================================================
+         * TASK 3 - ELIGIBILITY
+         * =================================================
+         */
+        String eligibilityError =
+                checkEligibility(
+                        nomination,
+                        programme
+                );
+
+
+        if (
+                eligibilityError != null
+        ) {
+
+            throw new RuntimeException(
+                    "Officer is not eligible. " +
+                            eligibilityError
+            );
+        }
+
+
+        /*
+         * =================================================
+         * TASK 2 - CAPACITY
+         * =================================================
+         */
+        assignCapacityStatus(
+                nomination,
+                programme
+        );
+
+
+        nomination.setStatusReason(
+                null
+        );
+
+
+        return nominationRepository.save(
+                nomination
+        );
+    }
+
+
+    /*
+     * =====================================================
+     * INPUT VALIDATION
+     * =====================================================
+     */
+    private void validateOfficerInput(
             Nomination nomination
     ) {
 
@@ -83,298 +238,382 @@ public class NominationService {
         ) {
 
             throw new RuntimeException(
-                    "Department is required."
+                    "Department / Division is required."
+            );
+        }
+
+
+        if (
+                nomination.getYearsOfService() == null
+        ) {
+
+            throw new RuntimeException(
+                    "Years of service is required."
+            );
+        }
+
+
+        if (
+                nomination.getYearsOfService() < 0
+        ) {
+
+            throw new RuntimeException(
+                    "Years of service cannot be negative."
             );
         }
 
 
         if (
                 nomination.getTrainingProgrammeId() == null ||
-                        nomination.getTrainingProgrammeId().isBlank()
+                        nomination
+                                .getTrainingProgrammeId()
+                                .isBlank()
         ) {
 
             throw new RuntimeException(
                     "Training programme is required."
             );
         }
-
-
-        String officerId =
-                nomination
-                        .getOfficerId()
-                        .trim()
-                        .toUpperCase();
-
-
-        String programmeId =
-                nomination
-                        .getTrainingProgrammeId()
-                        .trim()
-                        .toUpperCase();
-
-
-        /*
-         * TASK 1 duplicate prevention
-         */
-        boolean duplicate =
-                nominationRepository
-                        .existsByOfficerIdAndTrainingProgrammeId(
-                                officerId,
-                                programmeId
-                        );
-
-
-        if (duplicate) {
-
-            throw new DuplicateNominationException(
-                    "Duplicate nomination detected. " +
-                            "This officer is already nominated " +
-                            "for this training programme."
-            );
-        }
-
-
-        TrainingProgramme programme =
-                getProgramme(
-                        programmeId
-                );
-
-
-        nomination.setOfficerId(
-                officerId
-        );
-
-
-        nomination.setOfficerName(
-                nomination
-                        .getOfficerName()
-                        .trim()
-        );
-
-
-        nomination.setDepartment(
-                nomination
-                        .getDepartment()
-                        .trim()
-        );
-
-
-        nomination.setUserId(
-                null
-        );
-
-
-        applyProgrammeDetails(
-                nomination,
-                programme
-        );
-
-
-        /*
-         * Task 1 only
-         */
-        nomination.setStatus(
-                NOMINATED
-        );
-
-
-        return nominationRepository.save(
-                nomination
-        );
     }
 
 
     /*
      * =====================================================
-     * TASK 2 - USER BOOKING
+     * TASK 3 - ELIGIBILITY ENGINE
      * =====================================================
      */
-    public Nomination createUserBooking(
-            String userId,
-            String programmeId
+    private String checkEligibility(
+            Nomination nomination,
+            TrainingProgramme programme
     ) {
 
-        if (
-                userId == null ||
-                        userId.isBlank()
-        ) {
-
-            throw new RuntimeException(
-                    "User ID is required."
-            );
-        }
-
-
-        if (
-                programmeId == null ||
-                        programmeId.isBlank()
-        ) {
-
-            throw new RuntimeException(
-                    "Training programme is required."
-            );
-        }
-
-
-        String cleanUserId =
-                userId
-                        .trim()
-                        .toUpperCase();
-
-
-        String cleanProgrammeId =
-                programmeId
-                        .trim()
-                        .toUpperCase();
-
-
-        TrainingProgramme programme =
-                getProgramme(
-                        cleanProgrammeId
-                );
-
-
         /*
-         * -------------------------------------------------
-         * RULE 1:
-         * Same User + Same Programme cannot be booked twice
-         * -------------------------------------------------
+         * -------------------------------
+         * DEPARTMENT
+         * -------------------------------
          */
-        boolean duplicate =
-                nominationRepository
-                        .existsByUserIdAndTrainingProgrammeId(
-                                cleanUserId,
-                                cleanProgrammeId
-                        );
-
-
-        if (duplicate) {
-
-            throw new DuplicateNominationException(
-                    "You have already booked this training programme."
-            );
-        }
-
-
-        /*
-         * -------------------------------------------------
-         * RULE 2:
-         * User cannot have TWO active training programmes
-         * on the SAME DATE.
-         *
-         * CANCELLED bookings do not block the date.
-         * -------------------------------------------------
-         */
-        List<Nomination> existingBookings =
-                nominationRepository
-                        .findByUserIdOrderByReceivedAtDesc(
-                                cleanUserId
-                        );
-
-
-        boolean sameDateBookingExists =
-                existingBookings
-                        .stream()
-                        .anyMatch(
-                                booking ->
-
-                                        booking.getTrainingDate() != null
-
-                                                &&
-
-                                                booking
-                                                        .getTrainingDate()
-                                                        .equals(
-                                                                programme.getTrainingDate()
-                                                        )
-
-                                                &&
-
-                                                !CANCELLED.equals(
-                                                        booking.getStatus()
-                                                )
-                        );
+        String eligibleDepartments =
+                programme.getEligibleDepartments();
 
 
         if (
-                sameDateBookingExists
+                eligibleDepartments != null &&
+                        !eligibleDepartments.isBlank() &&
+                        !eligibleDepartments.equalsIgnoreCase(
+                                "All Departments"
+                        )
         ) {
 
-            throw new RuntimeException(
-                    "You already have another training programme booked for " +
-                            programme.getTrainingDate() +
-                            ". Two programmes cannot be booked on the same date."
-            );
-        }
+            String officerDepartment =
+                    normalizeText(
+                            nomination.getDepartment()
+                    );
 
 
-        Nomination booking =
-                new Nomination();
+            String[] departments =
+                    eligibleDepartments
+                            .split("[,;]");
 
 
-        booking.setUserId(
-                cleanUserId
-        );
+            boolean allowed =
+                    false;
 
 
-        booking.setOfficerId(
-                null
-        );
+            for (
+                    String department :
+                    departments
+            ) {
 
-
-        booking.setOfficerName(
-                null
-        );
-
-
-        booking.setDepartment(
-                null
-        );
-
-
-        applyProgrammeDetails(
-                booking,
-                programme
-        );
-
-
-        assignCapacityStatus(
-                booking,
-                programme
-        );
-
-
-        return nominationRepository.save(
-                booking
-        );
-    }
-
-
-    /*
-     * =====================================================
-     * GET PROGRAMME
-     * =====================================================
-     */
-    private TrainingProgramme getProgramme(
-            String programmeId
-    ) {
-
-        return programmeRepository
-                .findById(
-                        programmeId
-                )
-                .orElseThrow(
-                        () ->
-                                new RuntimeException(
-                                        "Training programme not found."
+                if (
+                        officerDepartment.equals(
+                                normalizeText(
+                                        department
                                 )
-                );
+                        )
+                ) {
+
+                    allowed =
+                            true;
+
+                    break;
+                }
+            }
+
+
+            if (!allowed) {
+
+                return "Officer department is not eligible for this programme.";
+            }
+        }
+
+
+        /*
+         * -------------------------------
+         * GRADE
+         * -------------------------------
+         */
+        String requiredGrade =
+                programme.getRequiredGrade();
+
+
+        if (
+                requiredGrade != null &&
+                        !requiredGrade.isBlank() &&
+                        !requiredGrade.equalsIgnoreCase(
+                                "Any"
+                        )
+        ) {
+
+            if (
+                    nomination.getGrade() == null ||
+                            nomination.getGrade().isBlank()
+            ) {
+
+                return "Officer grade is required for this programme.";
+            }
+
+
+            if (
+                    !normalizeText(
+                            nomination.getGrade()
+                    ).equals(
+                            normalizeText(
+                                    requiredGrade
+                            )
+                    )
+            ) {
+
+                return "Required grade is " +
+                        requiredGrade +
+                        ".";
+            }
+        }
+
+
+        /*
+         * -------------------------------
+         * DESIGNATION
+         * -------------------------------
+         */
+        String requiredDesignation =
+                programme
+                        .getRequiredDesignation();
+
+
+        if (
+                requiredDesignation != null &&
+                        !requiredDesignation.isBlank() &&
+                        !requiredDesignation.equalsIgnoreCase(
+                                "Any"
+                        )
+        ) {
+
+            if (
+                    nomination.getDesignation() == null ||
+                            nomination.getDesignation().isBlank()
+            ) {
+
+                return "Officer designation is required for this programme.";
+            }
+
+
+            if (
+                    !normalizeText(
+                            nomination.getDesignation()
+                    ).equals(
+                            normalizeText(
+                                    requiredDesignation
+                            )
+                    )
+            ) {
+
+                return "Required designation is " +
+                        requiredDesignation +
+                        ".";
+            }
+        }
+
+
+        /*
+         * -------------------------------
+         * YEARS OF SERVICE
+         * -------------------------------
+         */
+        int minimumYears =
+                programme
+                        .getMinimumYearsOfService() == null
+                        ?
+                        0
+                        :
+                        programme
+                                .getMinimumYearsOfService();
+
+
+        if (
+                nomination.getYearsOfService() <
+                        minimumYears
+        ) {
+
+            return "Minimum " +
+                    minimumYears +
+                    " years of service is required.";
+        }
+
+
+        /*
+         * -------------------------------
+         * PREVIOUS PARTICIPATION
+         * -------------------------------
+         */
+        int restrictionMonths =
+                programme
+                        .getRepeatRestrictionMonths() == null
+                        ?
+                        0
+                        :
+                        programme
+                                .getRepeatRestrictionMonths();
+
+
+        if (
+                restrictionMonths > 0
+        ) {
+
+            List<Nomination> history =
+                    nominationRepository
+                            .findByOfficerIdOrderByTrainingDateDesc(
+                                    nomination.getOfficerId()
+                            );
+
+
+            LocalDate currentTrainingDate =
+                    programme.getTrainingDate();
+
+
+            LocalDate earliestAllowedDate =
+                    currentTrainingDate
+                            .minusMonths(
+                                    restrictionMonths
+                            );
+
+
+            for (
+                    Nomination previous :
+                    history
+            ) {
+
+                /*
+                 * Only previous confirmed
+                 * participation is considered.
+                 */
+                if (
+                        !CONFIRMED.equals(
+                                previous.getStatus()
+                        )
+                ) {
+
+                    continue;
+                }
+
+
+                if (
+                        previous.getTrainingDate() == null ||
+                                previous.getTrainingProgrammeTitle() == null
+                ) {
+
+                    continue;
+                }
+
+
+                boolean sameTraining =
+                        normalizeText(
+                                previous
+                                        .getTrainingProgrammeTitle()
+                        ).equals(
+                                normalizeText(
+                                        programme.getTitle()
+                                )
+                        );
+
+
+                if (!sameTraining) {
+
+                    continue;
+                }
+
+
+                boolean beforeCurrentProgramme =
+                        previous
+                                .getTrainingDate()
+                                .isBefore(
+                                        currentTrainingDate
+                                );
+
+
+                boolean insideRestrictionPeriod =
+                        !previous
+                                .getTrainingDate()
+                                .isBefore(
+                                        earliestAllowedDate
+                                );
+
+
+                if (
+                        beforeCurrentProgramme &&
+                                insideRestrictionPeriod
+                ) {
+
+                    return "Officer participated in the same training within the previous " +
+                            restrictionMonths +
+                            " months.";
+                }
+            }
+        }
+
+
+        return null;
     }
 
 
     /*
      * =====================================================
-     * COPY PROGRAMME DETAILS
+     * TASK 2 - CAPACITY
+     * =====================================================
+     */
+    private void assignCapacityStatus(
+            Nomination nomination,
+            TrainingProgramme programme
+    ) {
+
+        long confirmedCount =
+                nominationRepository
+                        .countByTrainingProgrammeIdAndStatus(
+                                programme.getProgrammeId(),
+                                CONFIRMED
+                        );
+
+
+        if (
+                confirmedCount <
+                        programme.getMaximumParticipants()
+        ) {
+
+            nomination.setStatus(
+                    CONFIRMED
+            );
+
+        } else {
+
+            nomination.setStatus(
+                    WAITING_LIST
+            );
+        }
+    }
+
+
+    /*
+     * =====================================================
+     * PROGRAMME SNAPSHOT
      * =====================================================
      */
     private void applyProgrammeDetails(
@@ -412,11 +651,6 @@ public class NominationService {
         );
 
 
-        nomination.setTargetDepartments(
-                programme.getTargetDepartments()
-        );
-
-
         nomination.setReceivedAt(
                 LocalDateTime.now()
         );
@@ -425,47 +659,29 @@ public class NominationService {
 
     /*
      * =====================================================
-     * TASK 2 CAPACITY CHECK
+     * PROGRAMME
      * =====================================================
      */
-    private void assignCapacityStatus(
-            Nomination booking,
-            TrainingProgramme programme
+    private TrainingProgramme getProgramme(
+            String programmeId
     ) {
 
-        long confirmedCount =
-                nominationRepository
-                        .countByTrainingProgrammeIdAndStatus(
-                                programme.getProgrammeId(),
-                                CONFIRMED
-                        );
-
-
-        int capacity =
-                programme
-                        .getMaximumParticipants();
-
-
-        if (
-                confirmedCount < capacity
-        ) {
-
-            booking.setStatus(
-                    CONFIRMED
-            );
-
-        } else {
-
-            booking.setStatus(
-                    WAITING_LIST
-            );
-        }
+        return programmeRepository
+                .findById(
+                        programmeId
+                )
+                .orElseThrow(
+                        () ->
+                                new RuntimeException(
+                                        "Training programme not found."
+                                )
+                );
     }
 
 
     /*
      * =====================================================
-     * ALL DATA
+     * GET ALL
      * =====================================================
      */
     public List<Nomination> getAllNominations() {
@@ -477,28 +693,11 @@ public class NominationService {
 
     /*
      * =====================================================
-     * USER BOOKINGS
+     * TASK 2 SUMMARY
      * =====================================================
      */
-    public List<Nomination> getUserBookings(
-            String userId
-    ) {
-
-        return nominationRepository
-                .findByUserIdOrderByReceivedAtDesc(
-                        userId
-                                .trim()
-                                .toUpperCase()
-                );
-    }
-
-
-    /*
-     * =====================================================
-     * TASK 2 CAPACITY SUMMARY
-     * =====================================================
-     */
-    public Map<String, Object> getProgrammeSummary(
+    public Map<String, Object>
+    getProgrammeSummary(
             String programmeId
     ) {
 
@@ -528,7 +727,8 @@ public class NominationService {
 
         long availableSeats =
                 Math.max(
-                        programme.getMaximumParticipants()
+                        programme
+                                .getMaximumParticipants()
                                 - confirmed,
                         0
                 );
@@ -543,36 +743,30 @@ public class NominationService {
                 programme.getProgrammeId()
         );
 
-
         response.put(
                 "title",
                 programme.getTitle()
         );
-
 
         response.put(
                 "capacity",
                 programme.getMaximumParticipants()
         );
 
-
         response.put(
                 "confirmed",
                 confirmed
         );
-
 
         response.put(
                 "waiting",
                 waiting
         );
 
-
         response.put(
                 "availableSeats",
                 availableSeats
         );
-
 
         response.put(
                 "available",
@@ -586,7 +780,7 @@ public class NominationService {
 
     /*
      * =====================================================
-     * ADMIN CANCEL
+     * TASK 2 CANCEL
      * =====================================================
      */
     public Nomination cancelNomination(
@@ -599,95 +793,10 @@ public class NominationService {
                         .orElseThrow(
                                 () ->
                                         new RuntimeException(
-                                                "Record not found."
+                                                "Nomination not found."
                                         )
                         );
 
-
-        cancelAndPromote(
-                nomination
-        );
-
-
-        return nomination;
-    }
-
-
-    /*
-     * =====================================================
-     * USER CANCEL OWN BOOKING
-     * =====================================================
-     */
-    public Nomination cancelUserBooking(
-            Long bookingId,
-            String userId
-    ) {
-
-        if (
-                userId == null ||
-                        userId.isBlank()
-        ) {
-
-            throw new RuntimeException(
-                    "User ID is required."
-            );
-        }
-
-
-        Nomination booking =
-                nominationRepository
-                        .findById(
-                                bookingId
-                        )
-                        .orElseThrow(
-                                () ->
-                                        new RuntimeException(
-                                                "Booking not found."
-                                        )
-                        );
-
-
-        if (
-                booking.getUserId() == null
-        ) {
-
-            throw new RuntimeException(
-                    "This record is not a user booking."
-            );
-        }
-
-
-        if (
-                !booking
-                        .getUserId()
-                        .equalsIgnoreCase(
-                                userId.trim()
-                        )
-        ) {
-
-            throw new RuntimeException(
-                    "You are not allowed to cancel this booking."
-            );
-        }
-
-
-        cancelAndPromote(
-                booking
-        );
-
-
-        return booking;
-    }
-
-
-    /*
-     * =====================================================
-     * CANCEL + AUTO PROMOTION
-     * =====================================================
-     */
-    private void cancelAndPromote(
-            Nomination nomination
-    ) {
 
         if (
                 CANCELLED.equals(
@@ -696,7 +805,22 @@ public class NominationService {
         ) {
 
             throw new RuntimeException(
-                    "This record is already cancelled."
+                    "Nomination is already cancelled."
+            );
+        }
+
+
+        if (
+                !CONFIRMED.equals(
+                        nomination.getStatus()
+                ) &&
+                        !WAITING_LIST.equals(
+                                nomination.getStatus()
+                        )
+        ) {
+
+            throw new RuntimeException(
+                    "This nomination cannot be cancelled."
             );
         }
 
@@ -717,33 +841,112 @@ public class NominationService {
         );
 
 
+        nomination.setStatusReason(
+                "Cancelled by training coordinator."
+        );
+
+
         nominationRepository.save(
                 nomination
         );
 
 
-        if (
-                wasConfirmed
+        /*
+         * Only confirmed cancellation creates
+         * an available seat.
+         */
+        if (wasConfirmed) {
+
+            promoteFirstEligibleWaitingOfficer(
+                    programmeId
+            );
+        }
+
+
+        return nomination;
+    }
+
+
+    /*
+     * =====================================================
+     * FIRST ELIGIBLE WAITING OFFICER
+     * =====================================================
+     */
+    private void promoteFirstEligibleWaitingOfficer(
+            String programmeId
+    ) {
+
+        TrainingProgramme programme =
+                getProgramme(
+                        programmeId
+                );
+
+
+        List<Nomination> waitingList =
+                nominationRepository
+                        .findByTrainingProgrammeIdAndStatusOrderByReceivedAtAscIdAsc(
+                                programmeId,
+                                WAITING_LIST
+                        );
+
+
+        for (
+                Nomination waitingOfficer :
+                waitingList
         ) {
 
-            nominationRepository
-                    .findFirstByTrainingProgrammeIdAndStatusOrderByReceivedAtAscIdAsc(
-                            programmeId,
-                            WAITING_LIST
-                    )
-                    .ifPresent(
-                            waitingUser -> {
-
-                                waitingUser.setStatus(
-                                        CONFIRMED
-                                );
-
-
-                                nominationRepository.save(
-                                        waitingUser
-                                );
-                            }
+            /*
+             * Rules may have changed,
+             * therefore eligibility is checked again.
+             */
+            String eligibilityError =
+                    checkEligibility(
+                            waitingOfficer,
+                            programme
                     );
+
+
+            if (
+                    eligibilityError == null
+            ) {
+
+                waitingOfficer.setStatus(
+                        CONFIRMED
+                );
+
+
+                waitingOfficer.setStatusReason(
+                        "Automatically promoted from the waiting list."
+                );
+
+
+                nominationRepository.save(
+                        waitingOfficer
+                );
+
+
+                return;
+
+            } else {
+
+                /*
+                 * Waiting officer no longer
+                 * satisfies current eligibility rules.
+                 */
+                waitingOfficer.setStatus(
+                        NOT_ELIGIBLE
+                );
+
+
+                waitingOfficer.setStatusReason(
+                        eligibilityError
+                );
+
+
+                nominationRepository.save(
+                        waitingOfficer
+                );
+            }
         }
     }
 
@@ -765,7 +968,7 @@ public class NominationService {
                         .orElseThrow(
                                 () ->
                                         new RuntimeException(
-                                                "Booking not found."
+                                                "Nomination not found."
                                         )
                         );
 
@@ -782,31 +985,11 @@ public class NominationService {
 
         List<Nomination> waitingList =
                 nominationRepository
-                        .findAllByOrderByReceivedAtAsc()
-                        .stream()
-
-                        .filter(
-                                item ->
-                                        WAITING_LIST.equals(
-                                                item.getStatus()
-                                        )
-                        )
-
-                        .filter(
-                                item ->
-                                        item.getUserId() != null
-                        )
-
-                        .filter(
-                                item ->
-                                        nomination
-                                                .getTrainingProgrammeId()
-                                                .equals(
-                                                        item.getTrainingProgrammeId()
-                                                )
-                        )
-
-                        .toList();
+                        .findByTrainingProgrammeIdAndStatusOrderByReceivedAtAscIdAsc(
+                                nomination
+                                        .getTrainingProgrammeId(),
+                                WAITING_LIST
+                        );
 
 
         for (
@@ -830,5 +1013,41 @@ public class NominationService {
 
 
         return 0;
+    }
+
+
+    /*
+     * =====================================================
+     * NORMALIZE TEXT
+     * =====================================================
+     */
+    private String normalizeText(
+            String value
+    ) {
+
+        if (
+                value == null
+        ) {
+
+            return "";
+        }
+
+
+        return value
+                .trim()
+                .toUpperCase()
+
+                /*
+                 * Finance Division = Finance
+                 */
+                .replaceAll(
+                        "\\b(DIVISION|DEPARTMENT|DEPT)\\b",
+                        ""
+                )
+
+                .replaceAll(
+                        "[^A-Z0-9]",
+                        ""
+                );
     }
 }

@@ -11,7 +11,7 @@
     >
 
     <title>
-        Admin - Government Training Management System
+        Government Training Management System
     </title>
 
 
@@ -23,78 +23,40 @@
 
         body {
             margin: 0;
-
             font-family: Arial, sans-serif;
-
             background: #f4f6f8;
-
             color: #222;
         }
 
-
         header {
             background: #1f3c5c;
-
             color: white;
-
-            padding: 24px 30px;
+            padding: 25px 30px;
         }
-
 
         .header-content {
             max-width: 1250px;
-
             margin: auto;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
         }
-
 
         header h1 {
             margin: 0;
         }
 
-
         header p {
-            margin: 7px 0 0;
+            margin: 8px 0 0;
         }
-
-
-        .user-link {
-            background: white;
-
-            color: #1f3c5c;
-
-            text-decoration: none;
-
-            padding: 11px 18px;
-
-            border-radius: 7px;
-
-            font-weight: bold;
-        }
-
 
         .container {
             max-width: 1250px;
-
             margin: 30px auto;
-
             padding: 0 20px;
         }
 
-
         .card {
             background: white;
-
             padding: 27px;
-
             border-radius: 12px;
-
             margin-bottom: 25px;
 
             box-shadow:
@@ -102,301 +64,211 @@
                     rgba(0, 0, 0, 0.08);
         }
 
-
         h2 {
             margin-top: 0;
         }
 
-
         .description {
             color: #666;
-
             line-height: 1.6;
         }
 
-
         .grid {
             display: grid;
-
-            grid-template-columns:
-                    repeat(2, 1fr);
-
+            grid-template-columns: repeat(2, 1fr);
             gap: 17px;
         }
 
-
         .form-group {
             display: flex;
-
             flex-direction: column;
         }
 
-
         label {
             font-weight: bold;
-
             margin-bottom: 7px;
         }
 
+        .hint {
+            color: #777;
+            font-size: 12px;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
 
         input,
         select {
             width: 100%;
-
             padding: 11px;
-
             border: 1px solid #bbb;
-
             border-radius: 7px;
-
             font-size: 14px;
+            background: white;
         }
-
 
         input:focus,
         select:focus {
             outline: none;
-
             border-color: #1f3c5c;
         }
 
-
         button {
             border: none;
-
             border-radius: 7px;
-
             padding: 11px 18px;
-
             cursor: pointer;
+            font-weight: bold;
         }
-
 
         button:hover {
             opacity: 0.9;
         }
 
-
         .green-button {
             background: #198754;
-
             color: white;
-
             margin-top: 20px;
         }
-
 
         .blue-button {
             background: #1f3c5c;
-
             color: white;
-
             margin-top: 20px;
         }
 
+        .orange-button {
+            background: #d97706;
+            color: white;
+            margin-top: 20px;
+        }
 
         .red-button {
             background: #c82333;
-
             color: white;
         }
 
-
-        /*
-         * MESSAGE
-         */
-
         .message {
             display: none;
-
-            padding: 14px;
-
+            padding: 15px;
             margin-bottom: 20px;
-
             border-radius: 8px;
-
             font-weight: bold;
+            line-height: 1.5;
         }
-
 
         .success {
             display: block;
-
             background: #d4edda;
-
             color: #155724;
         }
 
-
         .warning {
             display: block;
-
             background: #fff3cd;
-
             color: #856404;
         }
 
-
         .error {
             display: block;
-
             background: #f8d7da;
-
             color: #721c24;
         }
 
+        .programme-info {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+        }
 
-        /*
-         * SUMMARY
-         */
+        .programme-info p {
+            margin: 7px 0;
+        }
 
         .summary-grid {
             display: grid;
-
-            grid-template-columns:
-                    repeat(4, 1fr);
-
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-
             margin-top: 20px;
         }
 
-
         .summary-card {
-            background: #fafafa;
-
-            border: 1px solid #ddd;
-
-            border-radius: 9px;
-
             padding: 18px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            background: #fafafa;
         }
-
 
         .summary-card strong {
             display: block;
-
             font-size: 28px;
-
             margin-top: 8px;
         }
-
-
-        /*
-         * TABLES
-         */
 
         .table-wrapper {
             overflow-x: auto;
         }
 
-
         table {
             width: 100%;
-
             border-collapse: collapse;
-
             margin-top: 15px;
         }
-
 
         th,
         td {
             padding: 11px;
-
             border-bottom: 1px solid #ddd;
-
             text-align: left;
-
-            font-size: 14px;
-
             vertical-align: middle;
+            font-size: 14px;
         }
-
 
         th {
             background: #eef2f5;
         }
 
-
         .badge {
             display: inline-block;
-
             padding: 6px 10px;
-
             border-radius: 15px;
-
             font-size: 11px;
-
             font-weight: bold;
         }
-
-
-        .nominated {
-            background: #dbeafe;
-
-            color: #1e40af;
-        }
-
 
         .confirmed {
             background: #d4edda;
-
             color: #155724;
         }
 
-
         .waiting {
             background: #fff3cd;
-
             color: #856404;
         }
-
 
         .cancelled {
             background: #f8d7da;
-
             color: #721c24;
         }
 
-
-        .user-booking {
-            background: #e9d5ff;
-
-            color: #6b21a8;
-        }
-
-
         .position {
             font-weight: bold;
-
             color: #856404;
         }
 
-
         .empty {
             text-align: center;
-
             color: #777;
-
             padding: 22px;
         }
-
 
         @media(max-width: 800px) {
 
             .grid,
             .summary-grid {
                 grid-template-columns: 1fr;
-            }
-
-
-            .header-content {
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 15px;
             }
         }
 
@@ -412,25 +284,13 @@
 
     <div class="header-content">
 
-        <div>
+        <h1>
+            Government Training Management System
+        </h1>
 
-            <h1>
-                Government Training Management System
-            </h1>
-
-            <p>
-                Admin View - Task 1 & Task 2 Management
-            </p>
-
-        </div>
-
-
-        <a
-                href="/user.html"
-                class="user-link"
-        >
-            User View
-        </a>
+        <p>
+            Training Coordinator / Admin Dashboard
+        </p>
 
     </div>
 
@@ -458,8 +318,10 @@
         </h2>
 
         <p class="description">
-            Programmes created here are automatically
-            available in the User View.
+
+            Create a training programme and define
+            configurable eligibility requirements.
+
         </p>
 
 
@@ -488,14 +350,79 @@
                 <div class="form-group">
 
                     <label>
+                        Programme Type
+                    </label>
+
+                    <select
+                            id="programmeType"
+                            required
+                    >
+
+                        <option value="">
+                            Select Programme Type
+                        </option>
+
+                        <option value="FINANCIAL">
+                            Financial Programme
+                        </option>
+
+                        <option value="TECHNICAL">
+                            Technical Programme
+                        </option>
+
+                        <option value="MANAGEMENT">
+                            Management Programme
+                        </option>
+
+                        <option value="GENERAL">
+                            General Programme
+                        </option>
+
+                    </select>
+
+                    <span class="hint">
+
+                        Programme type provides suitable
+                        default eligibility rules.
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
                         Programme Title
                     </label>
 
                     <input
                             id="programmeTitle"
-                            placeholder="Cyber Security Awareness"
+                            list="programmeTitles"
+                            placeholder="Financial Management"
                             required
                     >
+
+                    <datalist id="programmeTitles">
+
+                        <option value="Financial Management">
+
+                        <option value="Budget Management">
+
+                        <option value="Cybersecurity Awareness">
+
+                        <option value="Digital Transformation">
+
+                        <option value="ICT Governance">
+
+                        <option value="Project Management">
+
+                        <option value="Public Sector Leadership">
+
+                        <option value="Management Development">
+
+                    </datalist>
 
                 </div>
 
@@ -525,9 +452,24 @@
 
                     <input
                             id="venue"
+                            list="venues"
                             placeholder="Main Auditorium"
                             required
                     >
+
+                    <datalist id="venues">
+
+                        <option value="Main Auditorium">
+
+                        <option value="Training Hall A">
+
+                        <option value="Training Hall B">
+
+                        <option value="IT Training Centre">
+
+                        <option value="Conference Hall">
+
+                    </datalist>
 
                 </div>
 
@@ -559,6 +501,7 @@
                             id="maximumParticipants"
                             type="number"
                             min="1"
+                            placeholder="40"
                             required
                     >
 
@@ -569,14 +512,114 @@
                 <div class="form-group">
 
                     <label>
-                        Target Departments
+                        Eligible Departments
                     </label>
 
                     <input
-                            id="targetDepartments"
-                            placeholder="All Departments"
+                            id="eligibleDepartments"
+                            list="departmentRuleSuggestions"
+                            placeholder="Finance, Budget, Planning"
                             required
                     >
+
+                    <datalist id="departmentRuleSuggestions">
+
+                        <option value="All Departments">
+
+                        <option value="Finance, Budget, Planning">
+
+                        <option value="IT, ICT">
+
+                        <option value="Administration, Human Resources">
+
+                        <option value="Finance, Budget">
+
+                        <option value="Planning, Administration">
+
+                    </datalist>
+
+                    <span class="hint">
+
+                        Multiple departments can be entered
+                        using commas.
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Required Grade
+                    </label>
+
+                    <input
+                            id="requiredGrade"
+                            list="gradeSuggestions"
+                            value="Any"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Required Designation
+                    </label>
+
+                    <input
+                            id="requiredDesignation"
+                            list="designationSuggestions"
+                            value="Any"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Minimum Years of Service
+                    </label>
+
+                    <input
+                            id="minimumYearsOfService"
+                            type="number"
+                            min="0"
+                            value="0"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Repeat Restriction
+                        (Months)
+                    </label>
+
+                    <input
+                            id="repeatRestrictionMonths"
+                            type="number"
+                            min="0"
+                            value="12"
+                            required
+                    >
+
+                    <span class="hint">
+
+                        Example: 12 prevents repeating
+                        the same training within 12 months.
+
+                    </span>
 
                 </div>
 
@@ -588,7 +631,7 @@
                     type="submit"
                     class="green-button"
             >
-                Create Programme
+                Create Training Programme
             </button>
 
         </form>
@@ -598,20 +641,260 @@
 
 
     <!-- ================================================= -->
-    <!-- TASK 1 OFFICER NOMINATION -->
+    <!-- UPDATE ELIGIBILITY -->
     <!-- ================================================= -->
 
     <div class="card">
 
         <h2>
-            Task 1 - Officer Nomination
+            Update Programme Eligibility Rules
         </h2>
 
         <p class="description">
-            Duplicate nominations are prevented using
-            Officer ID + Training Programme ID.
-            Officer nominations remain separate from
-            Task 2 user capacity management.
+
+            Programme type and eligibility rules can be
+            changed without modifying the source code.
+
+        </p>
+
+
+        <form id="eligibilityForm">
+
+
+            <div class="grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Training Programme
+                    </label>
+
+                    <select
+                            id="editProgramme"
+                            required
+                    >
+
+                        <option value="">
+                            Select Programme
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Programme Type
+                    </label>
+
+                    <select
+                            id="editProgrammeType"
+                            required
+                    >
+
+                        <option value="FINANCIAL">
+                            Financial Programme
+                        </option>
+
+                        <option value="TECHNICAL">
+                            Technical Programme
+                        </option>
+
+                        <option value="MANAGEMENT">
+                            Management Programme
+                        </option>
+
+                        <option value="GENERAL">
+                            General Programme
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Eligible Departments
+                    </label>
+
+                    <input
+                            id="editEligibleDepartments"
+                            list="departmentRuleSuggestions"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Required Grade
+                    </label>
+
+                    <input
+                            id="editRequiredGrade"
+                            list="gradeSuggestions"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Required Designation
+                    </label>
+
+                    <input
+                            id="editRequiredDesignation"
+                            list="designationSuggestions"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Minimum Years of Service
+                    </label>
+
+                    <input
+                            id="editMinimumYears"
+                            type="number"
+                            min="0"
+                            required
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Repeat Restriction
+                        (Months)
+                    </label>
+
+                    <input
+                            id="editRepeatMonths"
+                            type="number"
+                            min="0"
+                            required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                    type="submit"
+                    class="orange-button"
+            >
+                Update Eligibility Rules
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- SUGGESTIONS -->
+    <!-- ================================================= -->
+
+    <datalist id="gradeSuggestions">
+
+        <option value="Any">
+
+        <option value="Grade I">
+
+        <option value="Grade II">
+
+        <option value="Grade III">
+
+        <option value="Special Grade">
+
+    </datalist>
+
+
+    <datalist id="designationSuggestions">
+
+        <option value="Any">
+
+        <option value="Manager">
+
+        <option value="Assistant Manager">
+
+        <option value="Development Officer">
+
+        <option value="Administrative Officer">
+
+        <option value="Finance Officer">
+
+        <option value="Budget Officer">
+
+        <option value="Planning Officer">
+
+        <option value="IT Officer">
+
+        <option value="ICT Officer">
+
+    </datalist>
+
+
+    <datalist id="officerDepartmentSuggestions">
+
+        <option value="Finance Division">
+
+        <option value="Budget Division">
+
+        <option value="Planning Division">
+
+        <option value="IT Division">
+
+        <option value="ICT Division">
+
+        <option value="Administration Division">
+
+        <option value="Human Resources Division">
+
+        <option value="Audit Division">
+
+    </datalist>
+
+
+
+    <!-- ================================================= -->
+    <!-- OFFICER NOMINATION -->
+    <!-- ================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Officer Nomination
+        </h2>
+
+        <p class="description">
+
+            Duplicate prevention, eligibility validation
+            and capacity allocation are performed automatically.
+
         </p>
 
 
@@ -628,7 +911,7 @@
                     </label>
 
                     <input
-                            id="adminOfficerId"
+                            id="officerId"
                             placeholder="EMP001"
                             required
                     >
@@ -644,7 +927,7 @@
                     </label>
 
                     <input
-                            id="adminOfficerName"
+                            id="officerName"
                             placeholder="A. Perera"
                             required
                     >
@@ -656,35 +939,65 @@
                 <div class="form-group">
 
                     <label>
-                        Nominating Department
+                        Department / Division
                     </label>
 
-                    <select
-                            id="adminDepartment"
+                    <input
+                            id="department"
+                            list="officerDepartmentSuggestions"
+                            placeholder="Finance Division"
                             required
                     >
 
-                        <option value="">
-                            Select Department
-                        </option>
+                </div>
 
-                        <option>
-                            Finance Division
-                        </option>
 
-                        <option>
-                            Administration Division
-                        </option>
 
-                        <option>
-                            IT Division
-                        </option>
+                <div class="form-group">
 
-                        <option>
-                            Human Resources Division
-                        </option>
+                    <label>
+                        Grade
+                    </label>
 
-                    </select>
+                    <input
+                            id="grade"
+                            list="gradeSuggestions"
+                            placeholder="Grade II"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Designation
+                    </label>
+
+                    <input
+                            id="designation"
+                            list="designationSuggestions"
+                            placeholder="Manager"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Years of Service
+                    </label>
+
+                    <input
+                            id="yearsOfService"
+                            type="number"
+                            min="0"
+                            placeholder="5"
+                            required
+                    >
 
                 </div>
 
@@ -697,12 +1010,12 @@
                     </label>
 
                     <select
-                            id="adminProgramme"
+                            id="nominationProgramme"
                             required
                     >
 
                         <option value="">
-                            Loading programmes...
+                            Select Programme
                         </option>
 
                     </select>
@@ -711,6 +1024,12 @@
 
 
             </div>
+
+
+            <div
+                    id="programmeInfo"
+                    class="programme-info"
+            ></div>
 
 
             <button
@@ -727,85 +1046,14 @@
 
 
     <!-- ================================================= -->
-    <!-- TASK 1 NOMINATED OFFICERS -->
+    <!-- CAPACITY DASHBOARD -->
     <!-- ================================================= -->
 
     <div class="card">
 
         <h2>
-            Task 1 - Officer Nominations
+            Programme Capacity Dashboard
         </h2>
-
-
-        <div class="table-wrapper">
-
-            <table>
-
-
-                <thead>
-
-                <tr>
-
-                    <th>
-                        Officer
-                    </th>
-
-                    <th>
-                        Department
-                    </th>
-
-                    <th>
-                        Training Programme
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                </tr>
-
-                </thead>
-
-
-                <tbody id="officerTable">
-
-                <tr>
-
-                    <td
-                            colspan="4"
-                            class="empty"
-                    >
-                        No officer nominations.
-                    </td>
-
-                </tr>
-
-                </tbody>
-
-
-            </table>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ================================================= -->
-    <!-- TASK 2 DASHBOARD -->
-    <!-- ================================================= -->
-
-    <div class="card">
-
-        <h2>
-            Task 2 - User Capacity & Waiting List
-        </h2>
-
-        <p class="description">
-            This section contains User Bookings only.
-            Task 1 Officer Nominations are not included
-            in capacity or waiting-list calculations.
-        </p>
 
 
         <div class="form-group">
@@ -825,7 +1073,6 @@
         </div>
 
 
-
         <div class="summary-grid">
 
 
@@ -840,10 +1087,9 @@
             </div>
 
 
-
             <div class="summary-card">
 
-                Confirmed Users
+                Confirmed
 
                 <strong id="confirmed">
                     0
@@ -852,17 +1098,15 @@
             </div>
 
 
-
             <div class="summary-card">
 
-                Waiting Users
+                Waiting
 
                 <strong id="waiting">
                     0
                 </strong>
 
             </div>
-
 
 
             <div class="summary-card">
@@ -883,45 +1127,37 @@
 
 
     <!-- ================================================= -->
-    <!-- CONFIRMED USER BOOKINGS -->
+    <!-- CONFIRMED -->
     <!-- ================================================= -->
 
     <div class="card">
 
         <h2>
-            Confirmed Users
+            Confirmed Participants
         </h2>
 
 
         <div class="table-wrapper">
 
-
             <table>
-
 
                 <thead>
 
                 <tr>
 
-                    <th>
-                        User
-                    </th>
+                    <th>Officer</th>
 
-                    <th>
-                        Type
-                    </th>
+                    <th>Department</th>
 
-                    <th>
-                        Programme
-                    </th>
+                    <th>Grade</th>
 
-                    <th>
-                        Status
-                    </th>
+                    <th>Designation</th>
 
-                    <th>
-                        Action
-                    </th>
+                    <th>Service</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
 
                 </tr>
 
@@ -933,16 +1169,15 @@
                 <tr>
 
                     <td
-                            colspan="5"
+                            colspan="7"
                             class="empty"
                     >
-                        Select a training programme.
+                        Select a programme.
                     </td>
 
                 </tr>
 
                 </tbody>
-
 
             </table>
 
@@ -953,46 +1188,44 @@
 
 
     <!-- ================================================= -->
-    <!-- WAITING USER BOOKINGS -->
+    <!-- WAITING LIST -->
     <!-- ================================================= -->
 
     <div class="card">
 
         <h2>
-            User Waiting List
+            Waiting List
         </h2>
 
         <p class="description">
-            Waiting users are processed in first-come,
-            first-served order.
+
+            Eligible nominations are processed
+            in first-come, first-served order.
+
         </p>
 
 
         <div class="table-wrapper">
 
-
             <table>
-
 
                 <thead>
 
                 <tr>
 
-                    <th>
-                        Position
-                    </th>
+                    <th>Position</th>
 
-                    <th>
-                        User ID
-                    </th>
+                    <th>Officer</th>
 
-                    <th>
-                        Programme
-                    </th>
+                    <th>Department</th>
 
-                    <th>
-                        Status
-                    </th>
+                    <th>Grade</th>
+
+                    <th>Designation</th>
+
+                    <th>Received</th>
+
+                    <th>Status</th>
 
                 </tr>
 
@@ -1004,7 +1237,7 @@
                 <tr>
 
                     <td
-                            colspan="4"
+                            colspan="7"
                             class="empty"
                     >
                         Waiting list is empty.
@@ -1013,7 +1246,6 @@
                 </tr>
 
                 </tbody>
-
 
             </table>
 
@@ -1024,37 +1256,33 @@
 
 
     <!-- ================================================= -->
-    <!-- CANCELLED USERS -->
+    <!-- CANCELLED -->
     <!-- ================================================= -->
 
     <div class="card">
 
         <h2>
-            Cancelled User Bookings
+            Cancelled Nominations
         </h2>
 
 
         <div class="table-wrapper">
 
-
             <table>
-
 
                 <thead>
 
                 <tr>
 
-                    <th>
-                        User ID
-                    </th>
+                    <th>Officer</th>
 
-                    <th>
-                        Programme
-                    </th>
+                    <th>Department</th>
 
-                    <th>
-                        Status
-                    </th>
+                    <th>Programme</th>
+
+                    <th>Status</th>
+
+                    <th>Reason</th>
 
                 </tr>
 
@@ -1066,16 +1294,15 @@
                 <tr>
 
                     <td
-                            colspan="3"
+                            colspan="5"
                             class="empty"
                     >
-                        No cancelled user bookings.
+                        No cancelled nominations.
                     </td>
 
                 </tr>
 
                 </tbody>
-
 
             </table>
 
@@ -1097,9 +1324,15 @@
         )
 
 
-    const adminProgramme =
+    const programmeType =
         document.getElementById(
-            'adminProgramme'
+            'programmeType'
+        )
+
+
+    const nominationProgramme =
+        document.getElementById(
+            'nominationProgramme'
         )
 
 
@@ -1109,9 +1342,21 @@
         )
 
 
-    const officerTable =
+    const editProgramme =
         document.getElementById(
-            'officerTable'
+            'editProgramme'
+        )
+
+
+    const editProgrammeType =
+        document.getElementById(
+            'editProgrammeType'
+        )
+
+
+    const programmeInfo =
+        document.getElementById(
+            'programmeInfo'
         )
 
 
@@ -1133,16 +1378,20 @@
         )
 
 
-    let programmes =
-        []
+    let programmes = []
+
+    let nominations = []
 
 
-    let nominations =
-        []
+    const now =
+        new Date()
 
 
     const today =
-        new Date()
+        new Date(
+            now.getTime() -
+            now.getTimezoneOffset() * 60000
+        )
             .toISOString()
             .split('T')[0]
 
@@ -1155,9 +1404,9 @@
 
 
     /*
-     * =================================================
+     * =====================================================
      * MESSAGE
-     * =================================================
+     * =====================================================
      */
 
     function showMessage(
@@ -1175,6 +1424,12 @@
 
         message.style.display =
             'block'
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
     }
 
 
@@ -1195,9 +1450,9 @@
 
 
     /*
-     * =================================================
-     * ESCAPE
-     * =================================================
+     * =====================================================
+     * ESCAPE HTML
+     * =====================================================
      */
 
     function escapeHtml(
@@ -1215,125 +1470,269 @@
 
         return String(value)
 
-            .replaceAll(
-                '&',
-                '&amp;'
-            )
+            .replaceAll('&', '&amp;')
 
-            .replaceAll(
-                '<',
-                '&lt;'
-            )
+            .replaceAll('<', '&lt;')
 
-            .replaceAll(
-                '>',
-                '&gt;'
-            )
+            .replaceAll('>', '&gt;')
 
-            .replaceAll(
-                '"',
-                '&quot;'
-            )
+            .replaceAll('"', '&quot;')
 
-            .replaceAll(
-                "'",
-                '&#039;'
-            )
+            .replaceAll("'", '&#039;')
     }
 
 
 
     /*
-     * =================================================
-     * LOAD PROGRAMMES
-     * =================================================
+     * =====================================================
+     * PROGRAMME TYPE DEFAULTS
+     * =====================================================
      */
 
-    async function loadProgrammes() {
+    programmeType.addEventListener(
+        'change',
+        function() {
 
-        try {
-
-            const response =
-                await fetch(
-                    '/api/programmes'
-                )
-
-
-            const data =
-                await response.json()
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.message ||
-                    'Unable to load programmes.'
-                )
-            }
+            applyProgrammeTypeDefaults(
+                this.value,
+                'eligibleDepartments',
+                'requiredGrade',
+                'requiredDesignation',
+                'minimumYearsOfService'
+            )
+        }
+    )
 
 
-            programmes =
-                data
+    editProgrammeType.addEventListener(
+        'change',
+        function() {
+
+            applyProgrammeTypeDefaults(
+                this.value,
+                'editEligibleDepartments',
+                'editRequiredGrade',
+                'editRequiredDesignation',
+                'editMinimumYears'
+            )
+        }
+    )
 
 
-            adminProgramme.innerHTML = `
+    function applyProgrammeTypeDefaults(
+        type,
+        departmentField,
+        gradeField,
+        designationField,
+        serviceField
+    ) {
 
-                <option value="">
-                    Select Programme
-                </option>
-
-            `
-
-
-            dashboardProgramme.innerHTML = `
-
-                <option value="">
-                    Select Programme
-                </option>
-
-            `
-
-
-            programmes.forEach(
-                programme => {
-
-                    const text =
-                        `${programme.title} (${programme.programmeId})`
-
-
-                    adminProgramme.add(
-                        new Option(
-                            text,
-                            programme.programmeId
-                        )
-                    )
-
-
-                    dashboardProgramme.add(
-                        new Option(
-                            text,
-                            programme.programmeId
-                        )
-                    )
-                }
+        const departments =
+            document.getElementById(
+                departmentField
             )
 
 
-        } catch (error) {
-
-            showMessage(
-                error.message,
-                'error'
+        const grade =
+            document.getElementById(
+                gradeField
             )
+
+
+        const designation =
+            document.getElementById(
+                designationField
+            )
+
+
+        const service =
+            document.getElementById(
+                serviceField
+            )
+
+
+        if (
+            type === 'FINANCIAL'
+        ) {
+
+            departments.value =
+                'Finance, Budget, Planning'
+
+
+            grade.value =
+                'Any'
+
+
+            designation.value =
+                'Any'
+
+
+            service.value =
+                '0'
+        }
+
+
+        else if (
+            type === 'TECHNICAL'
+        ) {
+
+            departments.value =
+                'IT, ICT'
+
+
+            grade.value =
+                'Any'
+
+
+            designation.value =
+                'Any'
+
+
+            service.value =
+                '0'
+        }
+
+
+        else if (
+            type === 'MANAGEMENT'
+        ) {
+
+            departments.value =
+                'All Departments'
+
+
+            grade.value =
+                'Grade II'
+
+
+            designation.value =
+                'Manager'
+
+
+            service.value =
+                '2'
+        }
+
+
+        else if (
+            type === 'GENERAL'
+        ) {
+
+            departments.value =
+                'All Departments'
+
+
+            grade.value =
+                'Any'
+
+
+            designation.value =
+                'Any'
+
+
+            service.value =
+                '0'
         }
     }
 
 
 
     /*
-     * =================================================
+     * =====================================================
+     * LOAD PROGRAMMES
+     * =====================================================
+     */
+
+    async function loadProgrammes() {
+
+        const response =
+            await fetch(
+                '/api/programmes'
+            )
+
+
+        const data =
+            await response.json()
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                'Unable to load programmes.'
+            )
+        }
+
+
+        programmes =
+            data
+
+
+        nominationProgramme.innerHTML = `
+            <option value="">
+                Select Programme
+            </option>
+        `
+
+
+        dashboardProgramme.innerHTML = `
+            <option value="">
+                Select Programme
+            </option>
+        `
+
+
+        editProgramme.innerHTML = `
+            <option value="">
+                Select Programme
+            </option>
+        `
+
+
+        programmes.forEach(
+            programme => {
+
+                const type =
+                    programme.programmeType ||
+                    'GENERAL'
+
+
+                const label =
+                    `${programme.title} (${programme.programmeId}) - ${type}`
+
+
+                nominationProgramme.add(
+                    new Option(
+                        label,
+                        programme.programmeId
+                    )
+                )
+
+
+                dashboardProgramme.add(
+                    new Option(
+                        label,
+                        programme.programmeId
+                    )
+                )
+
+
+                editProgramme.add(
+                    new Option(
+                        label,
+                        programme.programmeId
+                    )
+                )
+            }
+        )
+    }
+
+
+
+    /*
+     * =====================================================
      * CREATE PROGRAMME
-     * =================================================
+     * =====================================================
      */
 
     document.getElementById(
@@ -1344,67 +1743,126 @@
 
             event.preventDefault()
 
-
             hideMessage()
+
+
+            const maximumParticipants =
+                Number(
+                    document.getElementById(
+                        'maximumParticipants'
+                    ).value
+                )
+
+
+            const minimumYears =
+                Number(
+                    document.getElementById(
+                        'minimumYearsOfService'
+                    ).value
+                )
+
+
+            const repeatMonths =
+                Number(
+                    document.getElementById(
+                        'repeatRestrictionMonths'
+                    ).value
+                )
+
+
+            if (
+                maximumParticipants < 1
+            ) {
+
+                showMessage(
+                    'Maximum participants must be at least 1.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            if (
+                minimumYears < 0 ||
+                repeatMonths < 0
+            ) {
+
+                showMessage(
+                    'Eligibility values cannot be negative.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            if (
+                !programmeType.value
+            ) {
+
+                showMessage(
+                    'Please select a programme type.',
+                    'error'
+                )
+
+                return
+            }
 
 
             const body = {
 
                 programmeId:
-                    document
-                        .getElementById(
-                            'programmeId'
-                        )
-                        .value
-                        .trim(),
+                    document.getElementById(
+                        'programmeId'
+                    ).value.trim(),
+
+                programmeType:
+                    programmeType.value,
 
                 title:
-                    document
-                        .getElementById(
-                            'programmeTitle'
-                        )
-                        .value
-                        .trim(),
+                    document.getElementById(
+                        'programmeTitle'
+                    ).value.trim(),
 
                 trainingDate:
-                    document
-                        .getElementById(
-                            'trainingDate'
-                        )
-                        .value,
+                    document.getElementById(
+                        'trainingDate'
+                    ).value,
 
                 venue:
-                    document
-                        .getElementById(
-                            'venue'
-                        )
-                        .value
-                        .trim(),
+                    document.getElementById(
+                        'venue'
+                    ).value.trim(),
 
                 trainer:
-                    document
-                        .getElementById(
-                            'trainer'
-                        )
-                        .value
-                        .trim(),
+                    document.getElementById(
+                        'trainer'
+                    ).value.trim(),
 
                 maximumParticipants:
-                    Number(
-                        document
-                            .getElementById(
-                                'maximumParticipants'
-                            )
-                            .value
-                    ),
+                    maximumParticipants,
 
-                targetDepartments:
-                    document
-                        .getElementById(
-                            'targetDepartments'
-                        )
-                        .value
-                        .trim()
+                eligibleDepartments:
+                    document.getElementById(
+                        'eligibleDepartments'
+                    ).value.trim(),
+
+                requiredGrade:
+                    document.getElementById(
+                        'requiredGrade'
+                    ).value.trim(),
+
+                requiredDesignation:
+                    document.getElementById(
+                        'requiredDesignation'
+                    ).value.trim(),
+
+                minimumYearsOfService:
+                    minimumYears,
+
+                repeatRestrictionMonths:
+                    repeatMonths
             }
 
 
@@ -1425,9 +1883,7 @@
                             },
 
                             body:
-                                JSON.stringify(
-                                    body
-                                )
+                                JSON.stringify(body)
                         }
                     )
 
@@ -1440,7 +1896,7 @@
 
                     showMessage(
                         data.message ||
-                        'Unable to create programme.',
+                        'Programme creation failed.',
                         'error'
                     )
 
@@ -1460,9 +1916,27 @@
 
 
                 document.getElementById(
-                    'trainingDate'
-                ).min =
-                    today
+                    'requiredGrade'
+                ).value =
+                    'Any'
+
+
+                document.getElementById(
+                    'requiredDesignation'
+                ).value =
+                    'Any'
+
+
+                document.getElementById(
+                    'minimumYearsOfService'
+                ).value =
+                    '0'
+
+
+                document.getElementById(
+                    'repeatRestrictionMonths'
+                ).value =
+                    '12'
 
 
                 await loadProgrammes()
@@ -1481,9 +1955,368 @@
 
 
     /*
-     * =================================================
-     * TASK 1 OFFICER NOMINATION
-     * =================================================
+     * =====================================================
+     * LOAD RULES FOR EDIT
+     * =====================================================
+     */
+
+    editProgramme.addEventListener(
+        'change',
+        function() {
+
+            const programme =
+                programmes.find(
+                    item =>
+                        item.programmeId ===
+                        editProgramme.value
+                )
+
+
+            if (!programme) {
+
+                editProgrammeType.value =
+                    'GENERAL'
+
+
+                document.getElementById(
+                    'editEligibleDepartments'
+                ).value =
+                    ''
+
+
+                document.getElementById(
+                    'editRequiredGrade'
+                ).value =
+                    ''
+
+
+                document.getElementById(
+                    'editRequiredDesignation'
+                ).value =
+                    ''
+
+
+                document.getElementById(
+                    'editMinimumYears'
+                ).value =
+                    ''
+
+
+                document.getElementById(
+                    'editRepeatMonths'
+                ).value =
+                    ''
+
+
+                return
+            }
+
+
+            editProgrammeType.value =
+                programme.programmeType ||
+                'GENERAL'
+
+
+            document.getElementById(
+                'editEligibleDepartments'
+            ).value =
+                programme.eligibleDepartments ||
+                'All Departments'
+
+
+            document.getElementById(
+                'editRequiredGrade'
+            ).value =
+                programme.requiredGrade ||
+                'Any'
+
+
+            document.getElementById(
+                'editRequiredDesignation'
+            ).value =
+                programme.requiredDesignation ||
+                'Any'
+
+
+            document.getElementById(
+                'editMinimumYears'
+            ).value =
+                programme.minimumYearsOfService ??
+                0
+
+
+            document.getElementById(
+                'editRepeatMonths'
+            ).value =
+                programme.repeatRestrictionMonths ??
+                12
+        }
+    )
+
+
+
+    /*
+     * =====================================================
+     * UPDATE RULES
+     * =====================================================
+     */
+
+    document.getElementById(
+        'eligibilityForm'
+    ).addEventListener(
+        'submit',
+        async function(event) {
+
+            event.preventDefault()
+
+            hideMessage()
+
+
+            const programmeId =
+                editProgramme.value
+
+
+            if (!programmeId) {
+
+                showMessage(
+                    'Please select a programme.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            const minimumYears =
+                Number(
+                    document.getElementById(
+                        'editMinimumYears'
+                    ).value
+                )
+
+
+            const repeatMonths =
+                Number(
+                    document.getElementById(
+                        'editRepeatMonths'
+                    ).value
+                )
+
+
+            if (
+                minimumYears < 0 ||
+                repeatMonths < 0
+            ) {
+
+                showMessage(
+                    'Eligibility values cannot be negative.',
+                    'error'
+                )
+
+                return
+            }
+
+
+            const body = {
+
+                programmeType:
+                    editProgrammeType.value,
+
+                eligibleDepartments:
+                    document.getElementById(
+                        'editEligibleDepartments'
+                    ).value.trim(),
+
+                requiredGrade:
+                    document.getElementById(
+                        'editRequiredGrade'
+                    ).value.trim(),
+
+                requiredDesignation:
+                    document.getElementById(
+                        'editRequiredDesignation'
+                    ).value.trim(),
+
+                minimumYearsOfService:
+                    minimumYears,
+
+                repeatRestrictionMonths:
+                    repeatMonths
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/programmes/${encodeURIComponent(programmeId)}`,
+                        {
+
+                            method:
+                                'PUT',
+
+                            headers: {
+
+                                'Content-Type':
+                                    'application/json'
+                            },
+
+                            body:
+                                JSON.stringify(body)
+                        }
+                    )
+
+
+                const data =
+                    await response.json()
+
+
+                if (!response.ok) {
+
+                    showMessage(
+                        data.message ||
+                        'Unable to update eligibility rules.',
+                        'error'
+                    )
+
+                    return
+                }
+
+
+                showMessage(
+                    'Programme type and eligibility rules updated successfully.',
+                    'success'
+                )
+
+
+                await loadProgrammes()
+
+
+                editProgramme.value =
+                    programmeId
+
+
+            } catch (error) {
+
+                showMessage(
+                    'Unable to connect to server.',
+                    'error'
+                )
+            }
+        }
+    )
+
+
+
+    /*
+     * =====================================================
+     * PROGRAMME INFORMATION
+     * =====================================================
+     */
+
+    nominationProgramme.addEventListener(
+        'change',
+        function() {
+
+            const programme =
+                programmes.find(
+                    item =>
+                        item.programmeId ===
+                        nominationProgramme.value
+                )
+
+
+            if (!programme) {
+
+                programmeInfo.style.display =
+                    'none'
+
+                programmeInfo.innerHTML =
+                    ''
+
+                return
+            }
+
+
+            programmeInfo.style.display =
+                'block'
+
+
+            programmeInfo.innerHTML = `
+
+                <strong>
+                    Programme Details & Eligibility Rules
+                </strong>
+
+                <p>
+                    <b>Programme Type:</b>
+                    ${escapeHtml(
+                        programme.programmeType ||
+                        'GENERAL'
+                    )}
+                </p>
+
+                <p>
+                    <b>Date:</b>
+                    ${escapeHtml(
+                        programme.trainingDate
+                    )}
+                </p>
+
+                <p>
+                    <b>Venue:</b>
+                    ${escapeHtml(
+                        programme.venue
+                    )}
+                </p>
+
+                <p>
+                    <b>Eligible Departments:</b>
+                    ${escapeHtml(
+                        programme.eligibleDepartments
+                    )}
+                </p>
+
+                <p>
+                    <b>Required Grade:</b>
+                    ${escapeHtml(
+                        programme.requiredGrade
+                    )}
+                </p>
+
+                <p>
+                    <b>Required Designation:</b>
+                    ${escapeHtml(
+                        programme.requiredDesignation
+                    )}
+                </p>
+
+                <p>
+                    <b>Minimum Service:</b>
+                    ${escapeHtml(
+                        programme.minimumYearsOfService
+                    )}
+                    year(s)
+                </p>
+
+                <p>
+                    <b>Repeat Restriction:</b>
+                    ${escapeHtml(
+                        programme.repeatRestrictionMonths
+                    )}
+                    month(s)
+                </p>
+
+            `
+        }
+    )
+
+
+
+    /*
+     * =====================================================
+     * OFFICER NOMINATION
+     * =====================================================
      */
 
     document.getElementById(
@@ -1494,19 +2327,12 @@
 
             event.preventDefault()
 
-
             hideMessage()
 
 
-            const selectedProgramme =
-                programmes.find(
-                    programme =>
-                        programme.programmeId ===
-                        adminProgramme.value
-                )
-
-
-            if (!selectedProgramme) {
+            if (
+                !nominationProgramme.value
+            ) {
 
                 showMessage(
                     'Please select a training programme.',
@@ -1517,51 +2343,59 @@
             }
 
 
+            const years =
+                Number(
+                    document.getElementById(
+                        'yearsOfService'
+                    ).value
+                )
+
+
+            if (
+                years < 0
+            ) {
+
+                showMessage(
+                    'Years of service cannot be negative.',
+                    'error'
+                )
+
+                return
+            }
+
+
             const body = {
 
                 officerId:
-                    document
-                        .getElementById(
-                            'adminOfficerId'
-                        )
-                        .value
-                        .trim(),
+                    document.getElementById(
+                        'officerId'
+                    ).value.trim(),
 
                 officerName:
-                    document
-                        .getElementById(
-                            'adminOfficerName'
-                        )
-                        .value
-                        .trim(),
+                    document.getElementById(
+                        'officerName'
+                    ).value.trim(),
 
                 department:
-                    document
-                        .getElementById(
-                            'adminDepartment'
-                        )
-                        .value,
+                    document.getElementById(
+                        'department'
+                    ).value.trim(),
+
+                grade:
+                    document.getElementById(
+                        'grade'
+                    ).value.trim(),
+
+                designation:
+                    document.getElementById(
+                        'designation'
+                    ).value.trim(),
+
+                yearsOfService:
+                    years,
 
                 trainingProgrammeId:
-                    selectedProgramme.programmeId,
-
-                trainingProgrammeTitle:
-                    selectedProgramme.title,
-
-                trainingDate:
-                    selectedProgramme.trainingDate,
-
-                venue:
-                    selectedProgramme.venue,
-
-                trainer:
-                    selectedProgramme.trainer,
-
-                maximumParticipants:
-                    selectedProgramme.maximumParticipants,
-
-                targetDepartments:
-                    selectedProgramme.targetDepartments
+                    nominationProgramme.value
             }
 
 
@@ -1582,9 +2416,7 @@
                             },
 
                             body:
-                                JSON.stringify(
-                                    body
-                                )
+                                JSON.stringify(body)
                         }
                     )
 
@@ -1597,7 +2429,7 @@
 
                     showMessage(
                         data.message ||
-                        'Officer nomination failed.',
+                        'Nomination failed.',
                         'error'
                     )
 
@@ -1605,10 +2437,26 @@
                 }
 
 
-                showMessage(
-                    'Officer nominated successfully.',
-                    'success'
-                )
+                if (
+                    data.status ===
+                    'CONFIRMED'
+                ) {
+
+                    showMessage(
+                        'Officer is eligible and the nomination is CONFIRMED.',
+                        'success'
+                    )
+
+                } else if (
+                    data.status ===
+                    'WAITING_LIST'
+                ) {
+
+                    showMessage(
+                        'Officer is eligible, but programme capacity is full. Officer added to WAITING LIST.',
+                        'warning'
+                    )
+                }
 
 
                 document.getElementById(
@@ -1616,9 +2464,20 @@
                 ).reset()
 
 
+                programmeInfo.style.display =
+                    'none'
+
+
                 await loadNominations()
 
-                renderOfficerNominations()
+
+                if (
+                    dashboardProgramme.value ===
+                    data.trainingProgrammeId
+                ) {
+
+                    await loadDashboard()
+                }
 
 
             } catch (error) {
@@ -1634,9 +2493,9 @@
 
 
     /*
-     * =================================================
-     * LOAD ALL RECORDS
-     * =================================================
+     * =====================================================
+     * LOAD NOMINATIONS
+     * =====================================================
      */
 
     async function loadNominations() {
@@ -1654,8 +2513,8 @@
         if (!response.ok) {
 
             throw new Error(
-                    data.message ||
-                    'Unable to load records.'
+                data.message ||
+                'Unable to load nominations.'
             )
         }
 
@@ -1667,125 +2526,9 @@
 
 
     /*
-     * =================================================
-     * TASK 1 OFFICER TABLE
-     * =================================================
-     */
-
-    function renderOfficerNominations() {
-
-        const officers =
-            nominations
-
-                .filter(
-                    item =>
-                        item.officerId !== null
-                        &&
-                        item.officerId !== undefined
-                        &&
-                        item.officerId !== ''
-                )
-
-                .filter(
-                    item =>
-                        item.status ===
-                        'NOMINATED'
-                )
-
-
-        officerTable.innerHTML =
-            ''
-
-
-        if (
-            officers.length === 0
-        ) {
-
-            officerTable.innerHTML = `
-
-                <tr>
-
-                    <td
-                        colspan="4"
-                        class="empty"
-                    >
-                        No officer nominations.
-                    </td>
-
-                </tr>
-
-            `
-
-            return
-        }
-
-
-        officers.forEach(
-            officer => {
-
-                const row =
-                    document.createElement(
-                        'tr'
-                    )
-
-
-                row.innerHTML = `
-
-                    <td>
-
-                        <strong>
-                            ${escapeHtml(
-                                officer.officerId
-                            )}
-                        </strong>
-
-                        <br>
-
-                        ${escapeHtml(
-                            officer.officerName
-                        )}
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHtml(
-                            officer.department
-                        )}
-                    </td>
-
-
-                    <td>
-                        ${escapeHtml(
-                            officer.trainingProgrammeTitle
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <span class="badge nominated">
-                            NOMINATED
-                        </span>
-
-                    </td>
-
-                `
-
-
-                officerTable.appendChild(
-                    row
-                )
-            }
-        )
-    }
-
-
-
-    /*
-     * =================================================
-     * TASK 2 PROGRAMME CHANGE
-     * =================================================
+     * =====================================================
+     * DASHBOARD
+     * =====================================================
      */
 
     dashboardProgramme.addEventListener(
@@ -1793,13 +2536,6 @@
         loadDashboard
     )
 
-
-
-    /*
-     * =================================================
-     * TASK 2 DASHBOARD
-     * =================================================
-     */
 
     async function loadDashboard() {
 
@@ -1812,7 +2548,7 @@
 
         if (!programmeId) {
 
-            resetTask2()
+            resetDashboard()
 
             return
         }
@@ -1823,27 +2559,21 @@
             await loadNominations()
 
 
-            /*
-             * Backend summary already counts
-             * CONFIRMED / WAITING only,
-             * therefore officers with NOMINATED
-             * are excluded.
-             */
-            const summaryResponse =
+            const response =
                 await fetch(
                     `/api/nominations/programme/${encodeURIComponent(programmeId)}/summary`
                 )
 
 
             const summary =
-                await summaryResponse.json()
+                await response.json()
 
 
-            if (!summaryResponse.ok) {
+            if (!response.ok) {
 
                 throw new Error(
                     summary.message ||
-                    'Unable to load capacity summary.'
+                    'Unable to load programme summary.'
                 )
             }
 
@@ -1872,75 +2602,54 @@
                 summary.availableSeats
 
 
-
-            /*
-             * IMPORTANT:
-             * TASK 2 USER BOOKINGS ONLY.
-             */
-            const userBookings =
+            const records =
                 nominations.filter(
                     item =>
                         item.trainingProgrammeId ===
                         programmeId
-                        &&
-                        item.userId !== null
-                        &&
-                        item.userId !== undefined
-                        &&
-                        item.userId !== ''
                 )
 
 
-            const confirmedUsers =
-                userBookings
-
-                    .filter(
-                        item =>
-                            item.status ===
-                            'CONFIRMED'
-                    )
-
-                    .sort(
-                        sortByReceivedAt
-                    )
+            const confirmed =
+                records.filter(
+                    item =>
+                        item.status ===
+                        'CONFIRMED'
+                )
 
 
-            const waitingUsers =
-                userBookings
-
+            const waiting =
+                records
                     .filter(
                         item =>
                             item.status ===
                             'WAITING_LIST'
                     )
-
                     .sort(
-                        sortByReceivedAt
+                        sortByReceived
                     )
 
 
-            const cancelledUsers =
-                userBookings
-
-                    .filter(
-                        item =>
-                            item.status ===
-                            'CANCELLED'
-                    )
+            const cancelled =
+                records.filter(
+                    item =>
+                        item.status ===
+                        'CANCELLED'
+                )
 
 
-            renderConfirmedUsers(
-                confirmedUsers
+            renderConfirmed(
+                confirmed
             )
 
 
-            renderWaitingUsers(
-                waitingUsers
+            renderWaiting(
+                waiting
             )
 
 
-            renderCancelledUsers(
-                cancelledUsers
+            renderCancelled(
+                cancelled
             )
 
 
@@ -1955,7 +2664,13 @@
 
 
 
-    function sortByReceivedAt(
+    /*
+     * =====================================================
+     * FIFO SORT
+     * =====================================================
+     */
+
+    function sortByReceived(
         a,
         b
     ) {
@@ -1986,12 +2701,12 @@
 
 
     /*
-     * =================================================
-     * CONFIRMED USERS
-     * =================================================
+     * =====================================================
+     * CONFIRMED TABLE
+     * =====================================================
      */
 
-    function renderConfirmedUsers(
+    function renderConfirmed(
         list
     ) {
 
@@ -2008,10 +2723,10 @@
                 <tr>
 
                     <td
-                        colspan="5"
+                        colspan="7"
                         class="empty"
                     >
-                        No confirmed users.
+                        No confirmed participants.
                     </td>
 
                 </tr>
@@ -2023,71 +2738,84 @@
 
 
         list.forEach(
-            booking => {
+            officer => {
 
-                const row =
-                    document.createElement(
-                        'tr'
-                    )
+                confirmedTable.innerHTML += `
 
+                    <tr>
 
-                row.innerHTML = `
+                        <td>
 
-                    <td>
+                            <strong>
+                                ${escapeHtml(
+                                    officer.officerId
+                                )}
+                            </strong>
 
-                        <strong>
+                            <br>
+
                             ${escapeHtml(
-                                booking.userId
+                                officer.officerName
                             )}
-                        </strong>
 
-                    </td>
-
-
-                    <td>
-
-                        <span class="badge user-booking">
-                            USER BOOKING
-                        </span>
-
-                    </td>
+                        </td>
 
 
-                    <td>
-
-                        ${escapeHtml(
-                            booking.trainingProgrammeTitle
-                        )}
-
-                    </td>
+                        <td>
+                            ${escapeHtml(
+                                officer.department
+                            )}
+                        </td>
 
 
-                    <td>
-
-                        <span class="badge confirmed">
-                            CONFIRMED
-                        </span>
-
-                    </td>
+                        <td>
+                            ${escapeHtml(
+                                officer.grade || '-'
+                            )}
+                        </td>
 
 
-                    <td>
+                        <td>
+                            ${escapeHtml(
+                                officer.designation || '-'
+                            )}
+                        </td>
 
-                        <button
-                            class="red-button"
-                            onclick="cancelUserFromAdmin(${booking.id})"
-                        >
-                            Cancel
-                        </button>
 
-                    </td>
+                        <td>
+
+                            ${escapeHtml(
+                                officer.yearsOfService
+                            )}
+
+                            year(s)
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="badge confirmed">
+                                CONFIRMED
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                    class="red-button"
+                                    onclick="cancelNomination(${officer.id})"
+                            >
+                                Cancel
+                            </button>
+
+                        </td>
+
+                    </tr>
 
                 `
-
-
-                confirmedTable.appendChild(
-                    row
-                )
             }
         )
     }
@@ -2095,12 +2823,12 @@
 
 
     /*
-     * =================================================
-     * WAITING USERS
-     * =================================================
+     * =====================================================
+     * WAITING TABLE
+     * =====================================================
      */
 
-    function renderWaitingUsers(
+    function renderWaiting(
         list
     ) {
 
@@ -2117,7 +2845,7 @@
                 <tr>
 
                     <td
-                        colspan="4"
+                        colspan="7"
                         class="empty"
                     >
                         Waiting list is empty.
@@ -2132,55 +2860,73 @@
 
 
         list.forEach(
-            (booking, index) => {
+            (officer, index) => {
 
-                const row =
-                    document.createElement(
-                        'tr'
-                    )
+                waitingTable.innerHTML += `
 
+                    <tr>
 
-                row.innerHTML = `
-
-                    <td class="position">
-                        #${index + 1}
-                    </td>
+                        <td class="position">
+                            #${index + 1}
+                        </td>
 
 
-                    <td>
+                        <td>
 
-                        <strong>
+                            <strong>
+                                ${escapeHtml(
+                                    officer.officerId
+                                )}
+                            </strong>
+
+                            <br>
+
                             ${escapeHtml(
-                                booking.userId
+                                officer.officerName
                             )}
-                        </strong>
 
-                    </td>
-
-
-                    <td>
-
-                        ${escapeHtml(
-                            booking.trainingProgrammeTitle
-                        )}
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
+                            ${escapeHtml(
+                                officer.department
+                            )}
+                        </td>
 
-                        <span class="badge waiting">
-                            WAITING LIST
-                        </span>
 
-                    </td>
+                        <td>
+                            ${escapeHtml(
+                                officer.grade || '-'
+                            )}
+                        </td>
+
+
+                        <td>
+                            ${escapeHtml(
+                                officer.designation || '-'
+                            )}
+                        </td>
+
+
+                        <td>
+                            ${formatDateTime(
+                                officer.receivedAt
+                            )}
+                        </td>
+
+
+                        <td>
+
+                            <span class="badge waiting">
+                                WAITING LIST
+                            </span>
+
+                        </td>
+
+                    </tr>
 
                 `
-
-
-                waitingTable.appendChild(
-                    row
-                )
             }
         )
     }
@@ -2188,12 +2934,12 @@
 
 
     /*
-     * =================================================
-     * CANCELLED USERS
-     * =================================================
+     * =====================================================
+     * CANCELLED TABLE
+     * =====================================================
      */
 
-    function renderCancelledUsers(
+    function renderCancelled(
         list
     ) {
 
@@ -2210,10 +2956,10 @@
                 <tr>
 
                     <td
-                        colspan="3"
+                        colspan="5"
                         class="empty"
                     >
-                        No cancelled user bookings.
+                        No cancelled nominations.
                     </td>
 
                 </tr>
@@ -2225,50 +2971,61 @@
 
 
         list.forEach(
-            booking => {
+            officer => {
 
-                const row =
-                    document.createElement(
-                        'tr'
-                    )
+                cancelledTable.innerHTML += `
 
+                    <tr>
 
-                row.innerHTML = `
+                        <td>
 
-                    <td>
+                            <strong>
+                                ${escapeHtml(
+                                    officer.officerId
+                                )}
+                            </strong>
 
-                        <strong>
+                            <br>
+
                             ${escapeHtml(
-                                booking.userId
+                                officer.officerName
                             )}
-                        </strong>
 
-                    </td>
-
-
-                    <td>
-
-                        ${escapeHtml(
-                            booking.trainingProgrammeTitle
-                        )}
-
-                    </td>
+                        </td>
 
 
-                    <td>
+                        <td>
+                            ${escapeHtml(
+                                officer.department
+                            )}
+                        </td>
 
-                        <span class="badge cancelled">
-                            CANCELLED
-                        </span>
 
-                    </td>
+                        <td>
+                            ${escapeHtml(
+                                officer.trainingProgrammeTitle
+                            )}
+                        </td>
+
+
+                        <td>
+
+                            <span class="badge cancelled">
+                                CANCELLED
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            ${escapeHtml(
+                                officer.statusReason || '-'
+                            )}
+                        </td>
+
+                    </tr>
 
                 `
-
-
-                cancelledTable.appendChild(
-                    row
-                )
             }
         )
     }
@@ -2276,33 +3033,32 @@
 
 
     /*
-     * =================================================
-     * ADMIN CANCEL USER BOOKING
-     * =================================================
+     * =====================================================
+     * CANCEL + AUTO PROMOTION
+     * =====================================================
      */
 
-    async function cancelUserFromAdmin(
+    async function cancelNomination(
         id
     ) {
 
         const confirmation =
-            window.confirm(
-                'Cancel this confirmed user booking?\n\n' +
-                'Waiting #1 will automatically be promoted.'
+            confirm(
+                'Cancel this participant?\n\n' +
+                'If this is a confirmed participant, ' +
+                'the first eligible waiting officer will ' +
+                'automatically be promoted.'
             )
 
 
         if (!confirmation) {
+
             return
         }
 
 
         try {
 
-            /*
-             * Admin cancel endpoint can cancel
-             * the selected confirmed user booking.
-             */
             const response =
                 await fetch(
                     `/api/nominations/${id}/cancel`,
@@ -2322,7 +3078,7 @@
 
                 showMessage(
                     data.message ||
-                    'Unable to cancel booking.',
+                    'Unable to cancel nomination.',
                     'error'
                 )
 
@@ -2331,7 +3087,7 @@
 
 
             showMessage(
-                'User booking cancelled successfully. Waiting #1 was automatically promoted if available.',
+                'Nomination cancelled successfully. First eligible waiting officer was promoted if available.',
                 'success'
             )
 
@@ -2351,12 +3107,35 @@
 
 
     /*
-     * =================================================
-     * RESET TASK 2
-     * =================================================
+     * =====================================================
+     * DATE FORMAT
+     * =====================================================
      */
 
-    function resetTask2() {
+    function formatDateTime(
+        value
+    ) {
+
+        if (!value) {
+
+            return '-'
+        }
+
+
+        return new Date(
+            value
+        ).toLocaleString()
+    }
+
+
+
+    /*
+     * =====================================================
+     * RESET DASHBOARD
+     * =====================================================
+     */
+
+    function resetDashboard() {
 
         document.getElementById(
             'capacity'
@@ -2387,10 +3166,10 @@
             <tr>
 
                 <td
-                    colspan="5"
+                    colspan="7"
                     class="empty"
                 >
-                    Select a training programme.
+                    Select a programme.
                 </td>
 
             </tr>
@@ -2403,7 +3182,7 @@
             <tr>
 
                 <td
-                    colspan="4"
+                    colspan="7"
                     class="empty"
                 >
                     Waiting list is empty.
@@ -2419,10 +3198,10 @@
             <tr>
 
                 <td
-                    colspan="3"
+                    colspan="5"
                     class="empty"
                 >
-                    No cancelled user bookings.
+                    No cancelled nominations.
                 </td>
 
             </tr>
@@ -2433,9 +3212,9 @@
 
 
     /*
-     * =================================================
-     * START PAGE
-     * =================================================
+     * =====================================================
+     * START
+     * =====================================================
      */
 
     async function start() {
@@ -2444,12 +3223,7 @@
 
             await loadProgrammes()
 
-
             await loadNominations()
-
-
-            renderOfficerNominations()
-
 
         } catch (error) {
 

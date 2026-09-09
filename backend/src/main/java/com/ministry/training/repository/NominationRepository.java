@@ -4,14 +4,13 @@ import com.ministry.training.model.Nomination;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface NominationRepository
         extends JpaRepository<Nomination, Long> {
 
 
     /*
-     * TASK 1 DUPLICATE CHECK
+     * TASK 1
      */
     boolean existsByOfficerIdAndTrainingProgrammeId(
             String officerId,
@@ -20,16 +19,7 @@ public interface NominationRepository
 
 
     /*
-     * USER BOOKING DUPLICATE CHECK
-     */
-    boolean existsByUserIdAndTrainingProgrammeId(
-            String userId,
-            String trainingProgrammeId
-    );
-
-
-    /*
-     * TASK 2 CAPACITY
+     * TASK 2
      */
     long countByTrainingProgrammeIdAndStatus(
             String trainingProgrammeId,
@@ -37,11 +27,8 @@ public interface NominationRepository
     );
 
 
-    /*
-     * FIFO WAITING LIST
-     */
-    Optional<Nomination>
-    findFirstByTrainingProgrammeIdAndStatusOrderByReceivedAtAscIdAsc(
+    List<Nomination>
+    findByTrainingProgrammeIdAndStatusOrderByReceivedAtAscIdAsc(
             String trainingProgrammeId,
             String status
     );
@@ -52,19 +39,10 @@ public interface NominationRepository
 
 
     /*
-     * TASK 1 - Officer records
+     * TASK 3 - previous participation
      */
     List<Nomination>
-    findByOfficerIdOrderByReceivedAtDesc(
+    findByOfficerIdOrderByTrainingDateDesc(
             String officerId
-    );
-
-
-    /*
-     * USER VIEW - User bookings
-     */
-    List<Nomination>
-    findByUserIdOrderByReceivedAtDesc(
-            String userId
     );
 }

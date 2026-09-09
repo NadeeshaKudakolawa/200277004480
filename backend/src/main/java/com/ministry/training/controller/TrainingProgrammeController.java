@@ -2,8 +2,9 @@ package com.ministry.training.controller;
 
 import com.ministry.training.model.TrainingProgramme;
 import com.ministry.training.service.TrainingProgrammeService;
-import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,43 +15,85 @@ public class TrainingProgrammeController {
 
     private final TrainingProgrammeService programmeService;
 
+
     public TrainingProgrammeController(
             TrainingProgrammeService programmeService
     ) {
+
         this.programmeService =
                 programmeService;
     }
 
+
+    /*
+     * CREATE
+     */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public TrainingProgramme createProgramme(
-            @Valid
-            @RequestBody
-            TrainingProgramme programme
+    public ResponseEntity<TrainingProgramme>
+    createProgramme(
+            @RequestBody TrainingProgramme programme
     ) {
 
-        return programmeService
-                .createProgramme(
-                        programme
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(
+                        programmeService
+                                .createProgramme(
+                                        programme
+                                )
                 );
     }
 
+
+    /*
+     * GET ALL
+     */
     @GetMapping
-    public List<TrainingProgramme> getAllProgrammes() {
+    public ResponseEntity<List<TrainingProgramme>>
+    getAllProgrammes() {
 
-        return programmeService
-                .getAllProgrammes();
+        return ResponseEntity.ok(
+                programmeService
+                        .getAllProgrammes()
+        );
     }
 
+
+    /*
+     * GET ONE
+     */
     @GetMapping("/{programmeId}")
-    public TrainingProgramme getProgramme(
-            @PathVariable
-            String programmeId
+    public ResponseEntity<TrainingProgramme>
+    getProgramme(
+            @PathVariable String programmeId
     ) {
 
-        return programmeService
-                .getProgramme(
-                        programmeId
-                );
+        return ResponseEntity.ok(
+                programmeService
+                        .getProgramme(
+                                programmeId
+                        )
+        );
+    }
+
+
+    /*
+     * TASK 3
+     * UPDATE ELIGIBILITY RULES
+     */
+    @PutMapping("/{programmeId}")
+    public ResponseEntity<TrainingProgramme>
+    updateProgramme(
+            @PathVariable String programmeId,
+            @RequestBody TrainingProgramme programme
+    ) {
+
+        return ResponseEntity.ok(
+                programmeService
+                        .updateProgramme(
+                                programmeId,
+                                programme
+                        )
+        );
     }
 }
